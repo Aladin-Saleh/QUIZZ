@@ -18,7 +18,7 @@ $base_de_donnee = mysqli_connect("dwarves.iut-fbleau.fr","saleh","aladin.saleh",
  		
  		if ($taille_prenom <= 35) {
  			
- 			$insrt_base_de_donnee = ("INSERT INTO membre(prenom, mail, MDP) VALUES('$name','$addr_mail','mdp')");
+ 			$insrt_base_de_donnee = ("INSERT INTO membre(prenom, mail, MDP) VALUES('$name','$addr_mail','$mdp')");
  			mysqli_query($base_de_donnee, $insrt_base_de_donnee);
 
  				
@@ -54,7 +54,7 @@ echo $msg_erreur;
 <body>
 
 <div align="center">
-	<form method="post" action="Quizz">
+	<form method="post" action="">
 		<label for="prenom">Prénom</label> <br>
 			<input type="text" name="Prenom" id="prenom" placeholder="Entrez votre prenom !" value="<?php if(isset($name)){ echo $name; }?>">
 			<br>

@@ -7,19 +7,24 @@
 </head>
 <body>
 
+
+
+
 <div align="center">
-	<form method="POST" action="Quizz">
-		<label for="prenom">Prénom</label> <br>
-			<input type="text" name="Prenom" id="prenom" placeholder="Entrez votre prenom !" value="<?php if(isset($name)){ echo $name; }?>">
+	<form method="POST" action="">
+		<label for="mail">Email</label><br>
+			<input type="email" id="mail" name="mailCon" placeholder="Entrez votre email !" value="<?php if(isset($addr_mail)){ echo $addr_mail;} ?>">
 			<br>
 		
 		<label for="mdp">Mot de passe</label><br>
-			<input type="password" id="mdp" name="mdp" placeholder="Entrez votre mot de passe !" maxlength="30" minlength="8"><br>
+			<input type="password" id="mdp" name="mdpCon" placeholder="Entrez votre mot de passe !" maxlength="30" minlength="8"><br>
 
-			<input type="submit" name="subInsciption" value="Se connecter ! ">
+			<input type="submit" name="subConn" value="Se connecter ! ">
 	</form>
 </div>
-
+<div align="center">
+	<a href="/QUIZZ/index.php/PageAccueil/">Retour</a>
+</div>
 </body>
 
 

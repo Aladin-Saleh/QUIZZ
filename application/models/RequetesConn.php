@@ -1,50 +1,30 @@
-<?php 
-
+<?php
+			
 class RequetesConn extends CI_Model{
 
-
-
-function Connect()
+function Connect($mailCon,$mdpCon)
 {
-if (isset($_POST['subConn'])) {
-
-$mailCon = htmlspecialchars($_POST['mailCon']);
-$mdpCon = password_hash($_POST['mdpCon'], PASSWORD_DEFAULT);
-if (!empty($mailCon) && !empty($mdpCon)) {
+         $mailCon = htmlspecialchars($this->input->post('mailCon')); 
+         $mdpCon =$this->input->post('mdpCon');
+     
 
 
-		$this->db->select('*')
-				->from('membre')
-				->where('mail',$mailCon);
+
+		$this->db->where('mail',$mailCon);
+		$this->db->where('MDP',$mdpCon);
 				
-				$query = $this->db->get();
+				$query = $this->db->get('membre');
+             return $query->num_rows();
+             
+
 				
 
-	
 }
-else
-{
-
-$msg_error = "Tous les champs doivent être remplis ! ";
-}
-
-
-
-
 
 }
 
 
+?>
 
 
-if(isset($msg_erreur)) {
-
-	echo $msg_erreur;
-}
-}
-
-
-}
-
-
- ?>
+ 	

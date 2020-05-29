@@ -19,10 +19,51 @@ public function __construct(){
 
 public function index()
 {
-$this->RequetesInscr->insc();
+
+	if(isset($_POST['subInsciption'])) 
+ {
+  
+
+     if (!empty($_POST['Prenom']) && !empty($_POST['mail']) && !empty($_POST['mdp']) ) {
+         
+         if (strlen($_POST['Prenom']) <= 35) {
+             
+          
+			$this->RequetesInscr->insc();
+                  header("Location: ../PageAccueil/");
+         }
+         else
+         {
+             $msg_erreur = "Votre prenom est tros grand ! Changer le ! ";
+         }
+
+         
+     }
+
+     else
+     
+     {
+         $msg_erreur = " Veuillez remplir tous les champs ! ";
+     }
+ }
+
+if (isset($msg_erreur)) {
+
+echo $msg_erreur;
+
+}
+
+
+
 
 }
 
 }
 
 ?> 
+
+
+
+
+
+

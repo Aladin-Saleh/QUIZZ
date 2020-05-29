@@ -28,7 +28,7 @@
 </div>
 
 <div align="center">
-	<a href="/QUIZZ/index.php/PageAccueil/">Retour</a>
+	<a href="../PageAccueil/">Retour</a>
 </div>
 
 </body>

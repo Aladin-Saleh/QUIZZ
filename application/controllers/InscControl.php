@@ -24,13 +24,18 @@ public function index()
  {
   
 
-     if (!empty($_POST['Prenom']) && !empty($_POST['mail']) && !empty($_POST['mdp']) ) {
+     if (!empty($_POST['Prenom']) && !empty($_POST['mail']) && !empty($_POST['mdp']) ) { /*Si les inputs ne sont pas vide alors on accede au condition suivantes*/
          
-         if (strlen($_POST['Prenom']) <= 35) {
-             
-          
-			$this->RequetesInscr->insc();
+         if (strlen($_POST['Prenom']) <= 35) {/*Si le prenom depasse 35 caracteres*/
+                
+                if ($this->RequetesInscr->Verif($_POST['mail']) >0) {/* Si on trouve un ligne contenant le mail on refuse*/
+                     $msg_erreur = "Mail deja utilisé";
+                 } else
+                 {
+            
+			     $this->RequetesInscr->insc();
                   header("Location: ../PageAccueil/");
+              }
          }
          else
          {

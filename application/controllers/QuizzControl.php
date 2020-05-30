@@ -7,14 +7,16 @@ public function __construct()
 {
    	parent::__construct();
     $this->load->database();
-	$this->load->view('Quizz');
-	$this->load->model('RequeteQuizz');
-	$this->load->view('Footer.html');
+
 }
 
 
 public function index()
 {
+
+		$this->load->view('Quizz');
+	$this->load->model('RequeteQuizz');
+	$this->load->view('Footer.html');
 
 	if (isset($_GET['id'] )) {
 		$id_int = intval($_GET['id']);
@@ -44,12 +46,21 @@ public function index()
 
 		if (isset($msg_erreur_bis)) {
 			/*echo $msg_erreur_bis;*/
-			echo "<h1>Bienvenu(e) ".$prenom_user." ! ";
+			echo "<h1>Bienvenu(e) ".$prenom_user." ! "."Vous êtes sur le menu du prof !</h1>";
 		}
 }
 
 
 }
+
+
+public function CreateQuizz()
+{
+	$this->load->view('Create_Quizz');
+
+}
+
+
 
 
 

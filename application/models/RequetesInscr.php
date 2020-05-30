@@ -1,6 +1,6 @@
 <?php
 			
-class RequetesInscr extends CI_Model{
+class RequetesInscr extends CI_Model{ /*Fonction qui contient la requete : INSERT INTO membre(prenom,mail,MDP) VALUES("$name","$addr_mail","$mdp")*/
 
 function insc()
 {
@@ -21,6 +21,27 @@ function insc()
 				
 
 }
+
+
+
+function Verif($mailVerif)/*Fonction qui contient la requetes : SELECT * FROM membre WHERE mail="$mailVerif" retourn le nombre de ligne validant la requete*/
+	{
+		$mailVerif = htmlspecialchars($this->input->post('mail')); 
+		
+
+
+
+		$this->db->select('*');
+		$this->db->where('mail',$mailVerif);
+		
+
+		$query = $this->db->get('membre');
+		return $query->num_rows();
+
+
+
+
+	}
 
 }
 

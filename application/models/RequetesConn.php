@@ -2,7 +2,7 @@
 
 class RequetesConn extends CI_Model{
 
-	function Connect($mailCon,$mdpCon)
+	function Connect($mailCon,$mdpCon) /*Fonction qui contient la requete : SELECT * FROM membre WHERE MDP="$mdpCon" AND mail="$mailCon", elle retourne le nombre de ligne validant les conditions de la requete*/
 	{
 		$mailCon = htmlspecialchars($this->input->post('mailCon')); 
 		$mdpCon =$this->input->post('mdpCon');
@@ -14,8 +14,8 @@ class RequetesConn extends CI_Model{
 		$this->db->where('MDP',$mdpCon);
 
 		$query = $this->db->get('membre');
+		
 		return $query->num_rows();
-
 
 
 
@@ -24,7 +24,7 @@ class RequetesConn extends CI_Model{
 
 
 
-	function get_Name($mailCon,$mdpCon)
+	function get_Name($mailCon,$mdpCon) /*Fonction qui contient la requetes : SELECT prenom FROM membre WHERE MDP="$mdpCon" AND mail="$mailCon" retourn le prenom*/
 	{
 		$mailCon = htmlspecialchars($this->input->post('mailCon')); 
 		$mdpCon =$this->input->post('mdpCon');
@@ -43,7 +43,7 @@ class RequetesConn extends CI_Model{
 	}
 
 
-	function get_ID($mailCon,$mdpCon)
+	function get_ID($mailCon,$mdpCon) /*Fonction qui contient la requetes : SELECT ID FROM membre WHERE MDP="$mdpCon" AND mail="$mailCon" retourn l'id*/
 	{
 		$mailCon = htmlspecialchars($this->input->post('mailCon')); 
 		$mdpCon =$this->input->post('mdpCon');

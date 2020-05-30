@@ -34,12 +34,14 @@ public function Connexion()
 
      if (!empty($_POST['mailCon']) && !empty($_POST['mdpCon']) ) {
          
-         $validation = $this->RequetesConn->Connect($_POST['mailCon'],$_POST['mdpCon']);
-         $ID = $this->RequetesConn->get_ID($_POST['mailCon'],$_POST['mdpCon']);
+
+         
       
  
-          	if( $validation > 0 )
+          	if( $this->RequetesConn->Connect($_POST['mailCon'],$_POST['mdpCon'])> 0 )
           	{
+
+              $ID = $this->RequetesConn->get_ID($_POST['mailCon'],$_POST['mdpCon']);
                 $msg_erreur = "Accepté";
                 $msg_erreur =$ID;
 
@@ -67,8 +69,7 @@ public function Connexion()
 
 if (isset($msg_erreur)) {
 
-echo $ID;
-echo $Name;
+echo $msg_erreur;
 }
 				
 

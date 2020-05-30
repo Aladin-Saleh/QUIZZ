@@ -13,11 +13,7 @@ public function index()
 	}
 
 
-public function Quizz()
-{
 
-	$this->load->view('Quizz');
-}
 
 
 

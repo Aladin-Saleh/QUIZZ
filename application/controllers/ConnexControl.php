@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 
 class ConnexControl extends CI_Controller {
 
@@ -18,6 +18,8 @@ public function __construct(){
 }
 
 
+
+
 public function Connexion()
 {
 
@@ -32,11 +34,19 @@ public function Connexion()
 
      if (!empty($_POST['mailCon']) && !empty($_POST['mdpCon']) ) {
          
+         $validation = $this->RequetesConn->Connect($_POST['mailCon'],$_POST['mdpCon']);
+         $ID = $this->RequetesConn->get_ID($_POST['mailCon'],$_POST['mdpCon']);
+      
  
-          	if($this->RequetesConn->Connect($_POST['mailCon'],$_POST['mdpCon']) > 0 )
+          	if( $validation > 0 )
           	{
                 $msg_erreur = "Accepté";
-                  header("Location: ../PageAccueil/");
+                $msg_erreur =$ID;
+
+                $_SESSION['id'] = $ID;
+               
+               
+              header("Location: ../QuizzControl/index?id=".$_SESSION['id']);
           	}
           	
           	else
@@ -57,9 +67,8 @@ public function Connexion()
 
 if (isset($msg_erreur)) {
 
-echo '<font color="red">'.$msg_erreur."</font>";
-
-
+echo $ID;
+echo $Name;
 }
 				
 
@@ -77,3 +86,4 @@ echo '<font color="red">'.$msg_erreur."</font>";
 }
 
 
+?>

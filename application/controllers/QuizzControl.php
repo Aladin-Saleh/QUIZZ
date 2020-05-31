@@ -14,9 +14,9 @@ public function __construct()
 public function index()
 {
 
-		$this->load->view('Quizz');
+	
 	$this->load->model('RequeteQuizz');
-	$this->load->view('Footer.html');
+	
 
 	if (isset($_GET['id'] )) {
 		$id_int = intval($_GET['id']);
@@ -46,11 +46,14 @@ public function index()
 
 		if (isset($msg_erreur_bis)) {
 			/*echo $msg_erreur_bis;*/
-			echo "<h1>Bienvenu(e) ".$prenom_user." ! "."Vous êtes sur le menu du prof !</h1>";
-		}
+			$data['titre']= $prenom_user;
 }
 
 
+}
+$this->load->view('Header.html');
+$this->load->view('Quizz',$data);
+$this->load->view('Footer.html');
 }
 
 

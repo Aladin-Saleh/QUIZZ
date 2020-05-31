@@ -8,7 +8,7 @@ public function __construct(){
       parent::__construct();
       $this->load->database();
 
-
+    $this->load->view('Header.html');
 	$this->load->view('Inscription');
 	$this->load->model('RequetesInscr');
 	

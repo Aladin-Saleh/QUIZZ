@@ -4,26 +4,23 @@ class EleveMod extends CI_Model{
 
 
 	public function readtable($table){
-
+/*Cette fonction permet de lire la db et de la retourner*/
 		$res= $this->db->get($table);
 		return $res->result_array();
 
 	}
 
-	public function Connect($clef){
+	public function Connect($cle){
+/*Cette fonction j'en sais rien dutout*/
 
-		$clef =$this->input->post('clef');
+		$cle =$this->input->post('nameCLe');
 		
-		$this->db->where('clé',$clef);
+		$this->db->where('clé',$cle);
 		
 
 		$query = $this->db->get('Quizz');
 		
-		return $query->num_rows();
+		return $query;
 	}
-
-	/*public function Get_Key($clef){
-
-	}*/
 }
 ?>

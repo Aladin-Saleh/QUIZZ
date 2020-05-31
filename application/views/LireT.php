@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="http://www.iut-fbleau.fr/css/tacit.css">
 <html>
-<head>
-</head>
+<!-- C'est la page qui affiche toutes les clés disponible dans la db-->
 
 <body>
 <div class="header">

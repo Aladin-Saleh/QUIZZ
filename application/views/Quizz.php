@@ -11,9 +11,9 @@
 
 <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
 <h2>Consulter les statistiques des éléves :</h2>
-	<a href="">STATISTIQUE ! </a>
+	<a href="<?php $id= $_GET['id']; echo $id;?>">STATISTIQUE ! </a>
 <h2>Créer un Quizz :</h2><br>
-	<a href="CreateQuizz">CREER ! </a><br><br>
+	<a href="CreateQuizz?id=<?php $id= $_GET['id']; echo $id;?> ">CREER ! </a><br><br>
 </div>
 
 <div align="center"><br>

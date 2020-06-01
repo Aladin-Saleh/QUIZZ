@@ -6,14 +6,16 @@
 <html>
 <head>
 	<title>Inscription</title>
-	<h2 align="center">Inscription</h2>
+	
 </head>
 <body>
 
-
-
+<div class="header">
+<h1 align="center">Inscription</h1><br><br>
+<div>
+<div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
 <div align="center">
-	<form method="post" action="">
+	<form method="post" action="" ><br>
 		<label for="prenom">Prénom</label> <br>
 			<input type="text" name="Prenom" id="prenom" placeholder="Entrez votre prenom !" value="<?php if(isset($name)){ echo $name; }?>">
 			<br>
@@ -26,8 +28,9 @@
 			<input type="submit" name="subInsciption" value="S'inscrire ! ">
 	</form>
 </div>
+</div>
 
-<div align="center">
+<div align="center"><br>
 	<a href="../PageAccueil/">Retour</a>
 </div>
 

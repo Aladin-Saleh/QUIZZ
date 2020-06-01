@@ -5,12 +5,20 @@
 </head>
 <body>
 
+<div class="header">
+<h1 align="center"> Bienvenu(e) <?php echo $titre?> ! Vous êtes sur le menu du prof !</h1>
+</div><br><br>
 
-<h2>Consulter les statistiques éléves :</h2>
-	<a href="">STATISTIQUE ! </a>
-<h2>Crée un Quizz</h2>
-	<a href="CreateQuizz">CREER ! </a>
+<div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
+<h2>Consulter les statistiques des éléves :</h2>
+	<a href="<?php $id= $_GET['id']; echo $id;?>">STATISTIQUE ! </a>
+<h2>Créer un Quizz :</h2><br>
+	<a href="CreateQuizz?id=<?php $id= $_GET['id']; echo $id;?> ">CREER ! </a><br><br>
+</div>
 
+<div align="center"><br>
+	<a href="../PageAccueil/">Retour</a>
+</div>
 
 </body>
 </html>

@@ -3,14 +3,16 @@
 <html>
 <head>
 	<title>Connexion</title>
-	<h2 align="center">Connexion</h2>
+	
 </head>
 <body>
 
+<div class="header">
+<h1 align="center">Connexion</h1>
+</div><br><br>
 
-
-
-<div align="center">
+<div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
+<div align="center"><br>
 	<form method="POST" action="">
 		<label for="mail">Email</label><br>
 			<input type="email" id="mail" name="mailCon" placeholder="Entrez votre email !" value="<?php if(isset($addr_mail)){ echo $addr_mail;} ?>">
@@ -22,7 +24,9 @@
 			<input type="submit" name="subConn" value="Se connecter ! ">
 	</form>
 </div>
-<div align="center">
+</div>
+
+<div align="center"><br>
 	<a href="../PageAccueil/">Retour</a>
 </div>
 </body>

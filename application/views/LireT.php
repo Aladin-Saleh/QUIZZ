@@ -20,9 +20,9 @@
 	<div align="center">
 		<?php 
 			echo br(2);
-			echo anchor('Eleve/index', 'Retour');
 			
 		?>
+		<a href="index">Retour</a>
 	</div>
 </body>
 </html>

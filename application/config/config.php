@@ -23,11 +23,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-<<<<<<< HEAD
-$config['base_url'] = '/~saleh/QUIZZ/index.php';
-=======
-$config['base_url'] = '/Test/index.php';
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
+
+$config['base_url'] = '/QUIZZ/index.php';
+
+
 
 /*
 |--------------------------------------------------------------------------

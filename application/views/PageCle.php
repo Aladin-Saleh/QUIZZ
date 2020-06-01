@@ -29,9 +29,8 @@
 
 <div align="center">
 
-
+<a href="listerunetable">Liste des clé disponible dans ce site ! </a>
 <?php 
-echo anchor('Eleve/listerunetable', 'Liste des clefs à disposition dans ce site');
 echo br(2);
 ?>
 </div>
@@ -40,8 +39,8 @@ echo br(2);
 <div align="center">
 <?php
 echo br(3);
-echo anchor('PageAccueil/', 'Retour');
 ?>
+<a href="../PageAccueil/">Retour</a>
 </div>
 
 </body>

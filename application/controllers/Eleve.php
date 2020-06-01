@@ -26,15 +26,14 @@ class Eleve extends CI_Controller{
     if(!empty($_POST['nameCle'])){
     if(!empty($this->EleveMod->Connect($_POST['nameCle']))){
 
-<<<<<<< HEAD
+
     $data['TableQuestion']= $this->EleveMod->readtable('Question');
     $data['nombre']= $this->EleveMod->readtable('Quizz');
     $data['Reponse']= $this->EleveMod->readtable('Reponse');
 
-=======
     $data['resultat']= $this->EleveMod->readtable('Question');
     $data['nombre']= $this->EleveMod->readtable('Quizz');
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
+
     $this->load->view('Header.html');
     $this->load->view('EleveQuizz',$data);
     $this->load->view('Footer.html');

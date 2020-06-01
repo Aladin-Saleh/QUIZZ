@@ -6,17 +6,15 @@
 
 <body>
 <div class="header">
-<<<<<<< HEAD
 <h1 align="center">Votre Quizz</h1>
-=======
 <h1>Votre Quizz</h1>
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
+
 </div><br><br>
 
 <!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
 
 <?php
-<<<<<<< HEAD
+
 
 	$k=0;
 	
@@ -31,7 +29,6 @@
 		$numeroQuestion[] = $TableQuestion[$i]['Numéro'];
 		$nombreRéponse[] = $TableQuestion[$i]['NombreRéponse'];
 
-=======
 	
 	$ID_connect=54;
 
@@ -39,14 +36,12 @@
 
 		if($ID_connect == $resultat[$i]['ID']){
 		$data[]=$resultat[$i]['Questions'];
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
 		}
 	}
 
 	for($i=0;$i<= count($nombre)-1;$i++){				/*Ici la boucle récupère le nombre de question choisit par l'utilisateur*/
 
 		if($ID_connect == $nombre[$i]['ID']){
-<<<<<<< HEAD
 			$nombreQuestion=$nombre[$i]['NombreQuestion'];
 		}
 	}
@@ -70,7 +65,8 @@
 
 /*Ici la boucle permet d'afficher les questions et réponses dans la page*/
 	for($i=0; $i < $nombreQuestion; $i++){
-		?><h3 align="center" style="border: 1px solid #C82C3E; padding: 3px; background-color: #22C671;"> <?php echo $question[$i]?></h3><br>
+		?>
+		<h3 align="center" style="border: 1px solid #C82C3E; padding: 3px; background-color: #22C671;"> <?php echo $question[$i]?></h3><br>
 
 	<?php
 
@@ -97,7 +93,6 @@
 
 ?>
 	<hr><br>
-=======
 			$data2=$nombre[$i]['NombreQuestion'];
 		}
 	}
@@ -117,26 +112,19 @@
 
 	<?php } ?>
 	
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
 	<div align="center">
 	<button type="submit">Envoyé</button>
 	</div>
 	</fieldset>
 	</form>
-<<<<<<< HEAD
 
-=======
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
 	<div align="center">
 		<?php 
 			echo br(2);
-			echo anchor('Eleve/index', 'Retour');
 			
 		?>
+		<a href="Eleve/index/">Retour</a>
 	</div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 1907f299f7220f5c29dea76a0c36ce5798b0768b
 </body>
 </html>

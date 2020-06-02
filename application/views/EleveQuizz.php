@@ -6,7 +6,7 @@
 
 <body>
 <div class="header">
-<h1 align="center">Votre Quizz</h1>
+<h1 align="center"><?php echo $titre. '-' .$id ?></h1>
 </div><br><br>
 
 <!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
@@ -16,7 +16,7 @@
 
 	$k=0;
 	
-	$ID_connect=54;
+	$ID_connect=$id;
  /*Cette première boucle permet de récuperer les questions de la db et uniquement les questions qui possède le même "ID"*/
 
 	for($i=0;$i<= count($TableQuestion)-1;$i++){            														 
@@ -30,13 +30,6 @@
 		}
 	}
 
-
-	for($i=0;$i<= count($resultat)-1;$i++){            /*Cette première boucle permet de récuperer les questions de la db et uniquement les questions qui possède le 														 même "ID"*/
-
-		if($ID_connect == $resultat[$i]['ID']){
-		$data[]=$resultat[$i]['Questions'];
-		}
-	}
 
 	for($i=0;$i<= count($nombre)-1;$i++){				/*Ici la boucle récupère le nombre de question choisit par l'utilisateur*/
 

@@ -10,8 +10,8 @@ class EleveMod extends CI_Model{
 
 	}
 
-	public function Connect($cle){
-/*Cette fonction j'en sais rien dutout*/
+	/*public function Connect($cle){
+		Cette fonction j'en sais rien dutout
 
 		$cle =$this->input->post('nameCLe');
 		
@@ -21,6 +21,40 @@ class EleveMod extends CI_Model{
 		$query = $this->db->get('Quizz');
 		
 		return $query;
+	}*/
+
+	public function Connex($cle){
+
+		$this->db->select('Clé');
+		$this->db->from('Quizz');
+		$this->db->where('Clé',$cle);
+
+		$query = $this->db->get();
+
+	if ($query->num_rows() > 0) {
+ 
+      return $query->result();
+      
+    } else {
+      
+      return false;
+    }
+
+		
+	}
+
+
+	public function getID($cle){
+
+		$leResultat['ID']=array();
+		$this->db->select('ID');
+		$this->db->where('Clé',$cle);
+		
+
+		$query = $this->db->get('Quizz');
+
+		$recup = $query->row();
+		return $recup->ID;
 	}
 }
 ?>

@@ -12,7 +12,8 @@ class Eleve extends CI_Controller{
 
 	public function listerunetable(){
 /*Cette fonction permet de lire dans la table "Quizz" et ainsi afficher les données de la db pour informer l'utilisateur des différentes clés existante*/
-
+    
+    
 		$data['resultat']= $this->EleveMod->readtable('Quizz');
 		$this->load->view('Header.html');
 		$this->load->view('LireT',$data);
@@ -23,20 +24,25 @@ class Eleve extends CI_Controller{
 
 /*Ici c'est en phase beta, la fonction permet de se connecter à l'aide de la clé vers le quizz, que l'utilisateur doit effectuer. Elle transmet aussi le nombre de questions ainsi que toutes les questions de la db*/
 
-    if(!empty($_POST['nameCle'])){
-    if(!empty($this->EleveMod->Connect($_POST['nameCle']))){
+    if(!empty($this->input->post('nameCle'))){
+    if(!empty($this->EleveMod->Connex($this->input->post('nameCle')))){
+
+      $ID = $this->EleveMod->getID($this->input->post('nameCle'));
+      $msg_erreur = "Accepté";
+      $msg_erreur =$ID;
+
+      $_SESSION['id'] = $ID;
+               
+               
+      header("Location: ../EleveConnexion/index?id=".$_SESSION['id']);
 
 
-    $data['TableQuestion']= $this->EleveMod->readtable('Question');
-    $data['nombre']= $this->EleveMod->readtable('Quizz');
-    $data['Reponse']= $this->EleveMod->readtable('Reponse');
+    
 
-    $data['resultat']= $this->EleveMod->readtable('Question');
-    $data['nombre']= $this->EleveMod->readtable('Quizz');
 
-    $this->load->view('Header.html');
+    /*$this->load->view('Header.html');
     $this->load->view('EleveQuizz',$data);
-    $this->load->view('Footer.html');
+    $this->load->view('Footer.html');*/
     }else{
 
     $this->load->view('Header.html');

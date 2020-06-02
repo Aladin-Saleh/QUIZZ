@@ -82,10 +82,21 @@ public function CreateQuizz()
 
 public function pageCreation()
 {
+
+	$ok =0;
 	$nombre_question = $_GET['quest'];
+	$id = $_GET['id'];
+	$nom_Quizz = $this->input->post('nomQuizz');
+
 	/*echo $nombre_question;*/
 
+	$_SESSION['id'] = $id;
+	$_SESSION['nquest'] = $nombre_question;
+	$_SESSION['nom'] = $nom_Quizz;
 
+
+
+	$this->load->model('RequeteQuizz');
 	$this->load->view('Header.html');
 	$this->load->view('page_de_creation');
 	$this->load->view('Footer.html');
@@ -93,15 +104,18 @@ public function pageCreation()
 
 		<div align="center">
 			<form action="" method="post">
+				<input type="text" name="nomQuizz" placeholder="Entrer le nom du Quizz !">
 			<?php
 
-	for ($i=1; $i <= $nombre_question ; $i++) { 
-		 
+	for ($i=1; $i <= $nombre_question ; $i++) { /*La boucle crée le nombre de question que l'on a renseigné dans la page précedente, elle le récupere via l'url*/
+		
+		 $quest = $this->input->post('quest'.$i);/*"sauvegarde "le contenue de l'input*/
 		?>
 		<h2>Question n°<?php echo $i;?></h2>
 
-		<input type="text" name="quest<?php echo $i;?>" value="<?php  if(isset($quest)){ echo $quest;}?>" > 
-		<?php $quest = $_POST['quest'.$iq];?>
+		<input type="text" name="quest<?php echo $i;?>" value="<?php  if(isset($quest)){ echo $quest;}/*pour ne pas réecrire ses question*/?>" >
+		<input type="number" placeholder="Nombre de réponses" name="nombre_rep<?php echo $i?>">
+		
 		<br>
 		<?php
 	}
@@ -111,7 +125,7 @@ public function pageCreation()
 			</form>
 		</div>
 	<?php
-	$ok =0;
+	
 
 	for ($j=1; $j <= $nombre_question; $j++) { 
 		if (!empty($_POST['quest'.$j])) {
@@ -124,19 +138,52 @@ public function pageCreation()
 		}
 	}
 
-	if ($ok == $j) {
-		header("Location: Question/");
-	}
+		
+	
+if ($ok == ($j-1)) {/*Envoi dans la bd des questions*/
 
+		for ($y=1; $y <= $nombre_question ; $y++) { 
+			$qstn = $this->input->post('quest'.$y);
+			$nbr_Rep = $this->input->post('nombre_rep'.$y);
+			$this->RequeteQuizz->envoi_question_db($id,$qstn,$nbr_Rep,$y,$nom_Quizz);
+		}
+		header("Location: Question?id=".$_SESSION['id']."&nbrQuest=".$_SESSION['nquest']."&nom=".$_SESSION['nom']);
+	}
 
 }
 
 
 public function Question()
 {
+	$this->load->model('RequeteQuizz');
 
 	$this->load->view('Question');
 	$this->load->view('Footer.html');
+
+	$id = $_GET['id'];
+	$nmbr_Quest = $_GET['nbrQuest'];
+	$nom_Quizz = $_GET['nom'];
+
+	echo "<h1 align=center>".$nom_Quizz."</h1>";
+
+
+	for ($i=1; $i <=$nmbr_Quest ; $i++) { 
+		echo br(2);
+		$quest = $this->RequeteQuizz->affiche_question($i,$id,$nom_Quizz);
+		echo $quest;
+		
+		$nombr_Rep = $this->RequeteQuizz->get_nombre_reponse($nom_Quizz,$id,$i);
+				for ($j=0; $j < $nombr_Rep; $j++) { 
+					echo br(1);
+					?>
+					<input type="text" placeholder="Entrer une réponse !" name="reponse<?php echo $i; ?>">
+					<?php
+					/*On recupere les questions dans la db puis on les affiches.
+					Une fois la question affiché, on recupere le nombre de reponse que l'on avait attribué plus tôt et on affiche des input pour y ecrire nos reponse*/
+					
+				}
+		
+	}
 
 }
 

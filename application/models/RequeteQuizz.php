@@ -75,6 +75,23 @@ $result['NombreRéponse']=array();
 }
 
 
+function insert_reponse($nomQuizz,$ID,$reponse,$numero)
+{
+
+	$this->db->set('ID',$ID);
+	$this->db->set('NomQuizz',$nomQuizz);
+	$this->db->set('Réponses',$reponse);
+	$this->db->set('Numéro',$numero);
+
+
+
+	$this->db->insert('Reponse');
+
+
+
+}
+
+
 
 
 

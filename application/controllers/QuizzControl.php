@@ -163,7 +163,8 @@ public function Question()
 	$id = $_GET['id'];
 	$nmbr_Quest = $_GET['nbrQuest'];
 	$nom_Quizz = $_GET['nom'];
-
+	$ok =0;/*Cette variable permet de verifier si tout les input de reponse sont "ok", c'est à dire rempli.*/
+	$nombre_Rep_Tot = 0;
 	echo "<h1 align=center>".$nom_Quizz."</h1>";
 
 ?>
@@ -174,19 +175,23 @@ public function Question()
 		echo $quest;
 		
 		$nombr_Rep = $this->RequeteQuizz->get_nombre_reponse($nom_Quizz,$id,$i);
-		
-				for ($j=0; $j < $nombr_Rep; $j++) { 
-					echo br(1);
 
-					if (!empty($_POST['reponse'.$i])) {
-						echo "ok";
+		$nombre_Rep_Tot += $nombr_Rep;
+		
+				for ($j=1; $j <= $nombr_Rep; $j++) { 
+					echo br(1);
+					$rep = $this->input->post('reponse'.$i.$j);
+					if (!empty($_POST['reponse'.$i.$j])) {
+						$ok += 1;
+						$reponse = $this->input->post('reponse'.$i.$j);
+						 $this->RequeteQuizz->insert_reponse($nom_Quizz,$id,$reponse,$j);
 					}
 					else
 					{
-						echo "non";
+						echo "<font color =red>Completer toutes les réponses !</font> ";
 					}
 					?>
-					<input type="text" placeholder="Entrer une réponse !" name="reponse<?php echo $i; ?>">
+					<input type="text" placeholder="Entrer une réponse !" name="reponse<?php echo $i.$j; ?>" value="<?php if(isset($rep)){ echo $rep;} ?>">
 					<?php
 					/*On recupere les questions dans la db puis on les affiches.
 					Une fois la question affiché, on recupere le nombre de reponse que l'on avait attribué plus tôt et on affiche des input pour y ecrire nos reponse*/
@@ -195,16 +200,54 @@ public function Question()
 			
 		
 	}
+
 		?>
 
 				<br><br>
 				<input type="submit" name="envoiReponse" value="ENVOYER LES REPONSES ! ">
 				</form>
 				<?php
+					echo $nombre_Rep_Tot;
+					if ($ok == $nombre_Rep_Tot) {
+						header("Location: Reponse?id=".$id."&nombretotRep=".$nombre_Rep_Tot."&nomQuizz=".$nom_Quizz."&nombreQstn=".$nmbr_Quest);
+					}
 		
 
 
 
+}
+
+public function Reponse()
+{
+
+	$this->load->model('RequeteQuizz');
+	
+	$id = $_GET['id'];
+	$nombreRep_tot = $_GET['nombretotRep'];
+	$nomQuizz = $_GET['nomQuizz'];
+	$nmbrQuest = $_GET['nombreQstn'];
+	
+
+
+
+
+
+
+	for ($i=1; $i <=$nmbrQuest ; $i++) { 
+		echo br(2);
+		$quest = $this->RequeteQuizz->affiche_question($i,$id,$nomQuizz);
+		echo $quest;
+	}
+
+
+
+
+
+
+
+
+	$this->load->view('ReponseCreation');
+	$this->load->view('Footer.html');
 }
 
 

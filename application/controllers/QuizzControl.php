@@ -166,15 +166,25 @@ public function Question()
 
 	echo "<h1 align=center>".$nom_Quizz."</h1>";
 
-
+?>
+		<form method="post"><?php
 	for ($i=1; $i <=$nmbr_Quest ; $i++) { 
 		echo br(2);
 		$quest = $this->RequeteQuizz->affiche_question($i,$id,$nom_Quizz);
 		echo $quest;
 		
 		$nombr_Rep = $this->RequeteQuizz->get_nombre_reponse($nom_Quizz,$id,$i);
+		
 				for ($j=0; $j < $nombr_Rep; $j++) { 
 					echo br(1);
+
+					if (!empty($_POST['reponse'.$i])) {
+						echo "ok";
+					}
+					else
+					{
+						echo "non";
+					}
 					?>
 					<input type="text" placeholder="Entrer une réponse !" name="reponse<?php echo $i; ?>">
 					<?php
@@ -182,8 +192,18 @@ public function Question()
 					Une fois la question affiché, on recupere le nombre de reponse que l'on avait attribué plus tôt et on affiche des input pour y ecrire nos reponse*/
 					
 				}
+			
 		
 	}
+		?>
+
+				<br><br>
+				<input type="submit" name="envoiReponse" value="ENVOYER LES REPONSES ! ">
+				</form>
+				<?php
+		
+
+
 
 }
 

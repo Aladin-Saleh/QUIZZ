@@ -40,7 +40,7 @@ echo br(2);
 <?php
 echo br(3);
 ?>
-<a href="../../PageAccueil/">Retoqur</a>
+<a href="../PageAccueil/">Retour</a>
 </div>
 
 </body>

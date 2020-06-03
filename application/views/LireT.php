@@ -5,14 +5,14 @@
 
 <body>
 <div class="header">
-<h1>Voici la liste de toutes les clefs du site </h1>
+<h1>Voici la liste de toutes les clés du site </h1>
 </div><br><br>
 
 <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;"><br>
 <?php
 	$data=array();
 	for($i=0;$i<= count($resultat)-1;$i++){
-		$data[]='Auteur :  '.$resultat[$i]['Auteur']. '->   Nom du Test :  ' . $resultat[$i]['NOM']. '->   La clef pour efféctuer le Test : ' . $resultat[$i]['Clé'] ;
+		$data[]='Auteur :  '.$resultat[$i]['Auteur']. '->   Nom du Test :  ' . $resultat[$i]['NOM']. '->   La clé pour efféctuer le Test : ' . $resultat[$i]['Clé'] ;
 	}
 		echo ul($data);
 	?>

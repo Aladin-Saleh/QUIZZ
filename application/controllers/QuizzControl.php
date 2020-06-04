@@ -222,7 +222,6 @@ public function Reponse()
 
 	$this->load->model('RequeteQuizz');
 	
-	
 	$id = $_GET['id'];
 	$nombreRep_tot = $_GET['nombretotRep'];
 	$nomQuizz = $_GET['nomQuizz'];

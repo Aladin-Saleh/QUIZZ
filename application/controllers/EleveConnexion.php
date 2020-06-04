@@ -49,21 +49,17 @@ public function index()
 
 		if (isset($msg_erreur_bis)) {
 			/*echo $msg_erreur_bis;*/
-			$data['titre']= $prenom_user;
+			$data['nomAuteur']= $prenom_user;
 }
 
 
 }
-$Question = array();
-$test['essaie']= $this->EleveMod->readtable('Question');
-
-
 
 $nameCle = intval($_GET['cle']);;
 $data['cle'] = $nameCle;
 
 $nomQuizz= $this->EleveMod->getName($nameCle);
-$data['Nom'] = $nomQuizz;
+$data['NomQuizz'] = $nomQuizz;
 
 
 
@@ -71,8 +67,8 @@ $data['Nom'] = $nomQuizz;
 
 $data['id'] = $id_int;
 $data['TableQuestion']= $this->EleveMod->readtable('Question');
-$data['nombre']= $this->EleveMod->readtable('Quizz');
-$data['Reponse']= $this->EleveMod->readtable('Reponse');
+$data['TableQuizz']= $this->EleveMod->readtable('Quizz');
+$data['TableReponse']= $this->EleveMod->readtable('Reponse');
 
 $this->load->view('Header.html');
 $this->load->view('EleveQuizz',$data);

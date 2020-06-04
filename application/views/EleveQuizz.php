@@ -6,7 +6,7 @@
 
 <body>
 <div class="header">
-<h1 align="center"><?php echo $titre. '-' .$id.'-'.$cle.'-'.$Nom ?></h1>
+<h1 align="center"><?php echo $nomAuteur. '-' .$id.'-'.$cle.'-'.$NomQuizz ?></h1>
 </div><br><br>
 
 <!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
@@ -19,14 +19,14 @@
 	
 	$ID_connect=$id;
 
-	$nomQuizz = $Nom;
+	$nomQuizz = $NomQuizz;
 
 	$nomCle = $cle;
  /*Cette première boucle permet de récuperer les questions de la db et uniquement les questions qui possède le même "ID"*/
 
 	for($i=0;$i<= count($TableQuestion)-1;$i++){            														 
 
-		if($ID_connect == $TableQuestion[$i]['ID']){
+		if($nomQuizz == $TableQuestion[$i]['NomQuizz']){
 
 		$question[]=$TableQuestion[$i]['Questions'];
 		$numeroQuestion[] = $TableQuestion[$i]['Numéro'];
@@ -36,19 +36,20 @@
 	}
 
 
-	for($i=0;$i<= count($nombre)-1;$i++){				/*Ici la boucle récupère le nombre de question choisit par l'utilisateur*/
+	for($i=0;$i<= count($TableQuizz)-1;$i++){				/*Ici la boucle récupère le nombre de question choisit par l'utilisateur*/
 
-		if($ID_connect == $nombre[$i]['ID']){
-			$nombreQuestion=$nombre[$i]['NombreQuestion'];
+		if($nomQuizz == $TableQuizz[$i]['NOM']){
+			$nombreQuestion=$TableQuizz[$i]['NombreQuestion'];
 		}
 	}
 
 
-	for($j=0;$j<= count($Reponse)-1;$j++){
+	for($j=0;$j<= count($TableReponse)-1;$j++){
 
-		if($ID_connect == $Reponse[$j]['ID']){
-			$Réponse[]= $Reponse[$j]['Réponses'];
-			$numeroRéponse[]= $Reponse[$j]['Numéro'];
+		//$nomQuizz == $TableReponse[$j]['NomQuizz']
+		if($nomQuizz == $TableReponse[$j]['NomQuizz']){
+			$Réponse[]= $TableReponse[$j]['Réponses'];
+			$numeroRéponse[]= $TableReponse[$j]['Numéro'];
 
 		}
 	}

@@ -6,17 +6,22 @@
 
 <body>
 <div class="header">
-<h1 align="center"><?php echo $titre. '-' .$id ?></h1>
+<h1 align="center"><?php echo $titre. '-' .$id.'-'.$cle.'-'.$Nom ?></h1>
 </div><br><br>
 
 <!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
 
 <?php
 
+	
 
 	$k=0;
 	
 	$ID_connect=$id;
+
+	$nomQuizz = $Nom;
+
+	$nomCle = $cle;
  /*Cette première boucle permet de récuperer les questions de la db et uniquement les questions qui possède le même "ID"*/
 
 	for($i=0;$i<= count($TableQuestion)-1;$i++){            														 
@@ -47,13 +52,6 @@
 
 		}
 	}
-
-	/*echo ul($numeroRéponse);
-	echo br();
-	echo ul($numeroQuestion);
-	echo br();
-	echo ul($nombreRéponse);
-	echo ul($Réponse);*/
 
 /*Ici la boucle permet d'afficher les questions et réponses dans la page*/
 	for($i=0; $i < $nombreQuestion; $i++){

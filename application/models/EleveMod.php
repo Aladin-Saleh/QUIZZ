@@ -56,5 +56,31 @@ class EleveMod extends CI_Model{
 		$recup = $query->row();
 		return $recup->ID;
 	}
+
+	public function getKey($id){
+
+        $result['Clé']=array();
+        $this->db->select('Clé');
+        $this->db->where('ID',$id);
+        //$this->db->where('NOM',$nom);
+
+        $query = $this->db->get('Quizz');
+
+        $recup = $query->row();
+        return $recup->Clé;
+    }
+
+    public function getName($cle){
+
+        $result['NOM']=array();
+        $this->db->select('NOM');
+        $this->db->where('Clé',$cle);
+
+        $query = $this->db->get('Quizz');
+
+        $recup = $query->row();
+        return $recup->NOM;
+    }
+
 }
 ?>

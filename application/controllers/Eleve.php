@@ -24,6 +24,8 @@ class Eleve extends CI_Controller{
 
 /*Ici c'est en phase beta, la fonction permet de se connecter à l'aide de la clé vers le quizz, que l'utilisateur doit effectuer. Elle transmet aussi le nombre de questions ainsi que toutes les questions de la db*/
 
+    $nom = $_POST['nameCle'];
+
     if(!empty($this->input->post('nameCle'))){
     if(!empty($this->EleveMod->Connex($this->input->post('nameCle')))){
 
@@ -32,17 +34,11 @@ class Eleve extends CI_Controller{
       $msg_erreur =$ID;
 
       $_SESSION['id'] = $ID;
+      $divert=$row['id'].$ID."&cle=".($nom);
                
                
-      header("Location: ../EleveConnexion/index?id=".$_SESSION['id']);
+      header("Location: ../EleveConnexion/index?id=$divert");
 
-
-    
-
-
-    /*$this->load->view('Header.html');
-    $this->load->view('EleveQuizz',$data);
-    $this->load->view('Footer.html');*/
     }else{
 
     $this->load->view('Header.html');
@@ -50,55 +46,10 @@ class Eleve extends CI_Controller{
     $this->load->view('Footer.html');
 
     }
-  }
+    }
 
 
 	}
 
-
-	/*public function Connexion(){
-		
-		if(isset($_POST['Valide'])) 
- {
-         
-         
-
-     
-
-     if (!empty($_POST['Auteur']) && !empty($_POST['clef']) ) {
-         
-
-         
-      
- 
-          	if( $this->RequetesConn->Connect($_POST['Auteur'],$_POST['clef'])> 0 )
-          	{
-
-              $ID = $this->RequetesConn->get_ID($_POST['mailCon'],$_POST['mdpCon']);
-                $msg_erreur = "Accepté";
-                $msg_erreur =$ID;
-
-                $_SESSION['id'] = $ID;
-               
-               
-              header("Location: ../QuizzControl/index?id=".$_SESSION['id']);
-          	}
-          	
-          	else
-          	{
-          		$msg_erreur = "Mot de passe ou Email Invalid ! Recommencez !";
-          	}
-          		
-     }
-
-     else
-     
-     {
-         $msg_erreur = " Veuillez remplir tous les champs ! ";
-     }
-          	
-          	
- }
-	}*/
 }
 ?>

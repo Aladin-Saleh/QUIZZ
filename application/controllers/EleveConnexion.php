@@ -16,6 +16,9 @@ public function index()
 
 	
 	$this->load->model('RequeteQuizz');
+	$this->load->model('EleveMod');
+
+
 	
 
 	if (isset($_GET['id'] )) {
@@ -51,6 +54,21 @@ public function index()
 
 
 }
+$Question = array();
+$test['essaie']= $this->EleveMod->readtable('Question');
+
+
+
+$nameCle = intval($_GET['cle']);;
+$data['cle'] = $nameCle;
+
+$nomQuizz= $this->EleveMod->getName($nameCle);
+$data['Nom'] = $nomQuizz;
+
+
+
+
+
 $data['id'] = $id_int;
 $data['TableQuestion']= $this->EleveMod->readtable('Question');
 $data['nombre']= $this->EleveMod->readtable('Quizz');

@@ -75,13 +75,15 @@ $result['NombreRéponse']=array();
 }
 
 
-function insert_reponse($nomQuizz,$ID,$reponse,$numero)
+function insert_reponse($nomQuizz,$ID,$reponse,$numero,$numeroRep)
 {
 
 	$this->db->set('ID',$ID);
 	$this->db->set('NomQuizz',$nomQuizz);
 	$this->db->set('Réponses',$reponse);
 	$this->db->set('Numéro',$numero);
+	$this->db->set('NumeroRep',$numeroRep);
+
 
 
 
@@ -90,6 +92,56 @@ function insert_reponse($nomQuizz,$ID,$reponse,$numero)
 
 
 }
+
+
+function get_rep($ID,$NomQuizz,$numero,$numRep)	/*SELECT Réponses FROM Reponse Where NomQuizz="$NomQuizz" AND ID="$id" AND Numéro="$numero";*/
+
+{
+
+$result['Réponses']=array();
+	$this->db->select('Réponses');
+	$this->db->where('ID',$ID);
+	$this->db->where('NomQuizz',$NomQuizz);
+	$this->db->where('Numéro',$numero);
+	$this->db->where('NumeroRep',$numRep);
+
+
+	$query = $this->db->get('Reponse');
+		
+		$recup = $query->row();
+		return $recup->Réponses;
+
+}
+
+function set_true($ID,$NomQuizz,$numero,$numRep)
+{
+
+	$this->db->set('BonneReponse',TRUE);
+	$this->db->where('ID',$ID);
+	$this->db->where('NomQuizz',$NomQuizz);
+	$this->db->where('Numéro',$numero);
+	$this->db->where('NumeroRep',$numRep);
+
+	$this->db->update('Reponse');
+}
+
+function set_Quizz($ID,$NombreQuestion,$nomQuizz,$Cle,$Duree,$Auteur)
+{
+
+	$this->db->set('ID',$ID);
+	$this->db->set('Clé',$Cle);
+	$this->db->set('NOM',$nomQuizz);
+	$this->db->set('Auteur',$Auteur);
+	$this->db->set('NombreQuestion',$NombreQuestion);
+	$this->db->set('Durée',$Duree);
+
+	$this->db->insert('Quizz');
+
+
+
+
+}
+
 
 
 

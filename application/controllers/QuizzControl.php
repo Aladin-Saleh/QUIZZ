@@ -184,7 +184,7 @@ public function Question()
 					if (!empty($_POST['reponse'.$i.$j])) {
 						$ok += 1;
 						$reponse = $this->input->post('reponse'.$i.$j);
-						 $this->RequeteQuizz->insert_reponse($nom_Quizz,$id,$reponse,$j);
+						 $this->RequeteQuizz->insert_reponse($nom_Quizz,$id,$reponse,$i,$j);
 					}
 					else
 					{
@@ -221,6 +221,8 @@ public function Reponse()
 {
 
 	$this->load->model('RequeteQuizz');
+	$this->load->view('ReponseCreation');
+	
 	
 	$id = $_GET['id'];
 	$nombreRep_tot = $_GET['nombretotRep'];
@@ -231,28 +233,95 @@ public function Reponse()
 
 
 
-
+	echo "<h1 align=center>".$nomQuizz."</h1>";
+	?><form action="" method="post"><?php
 
 	for ($i=1; $i <=$nmbrQuest ; $i++) { 
 		echo br(2);
 		$quest = $this->RequeteQuizz->affiche_question($i,$id,$nomQuizz);
-		echo $quest;
+		echo "<h2>".$quest."</h2>";
+
+			$nbr_rep = $this->RequeteQuizz->get_nombre_reponse($nomQuizz,$id,$i);
+			
+		for ($j=1; $j <= $nbr_rep ; $j++) { 
+			$rep = $this->RequeteQuizz->get_rep($id,$nomQuizz,$i,$j);
+			echo br(2);
+			echo $rep;
+			?>
+
+			<input type="checkbox" name="bonneRep<?php echo $i.$j; ?>">
+			<?php
+			if (isset($_POST['bonneRep'.$i.$j])) {
+				echo "ok";
+				$this->RequeteQuizz->set_true($id,$nomQuizz,$i,$j);
+				header("Location: CreateCle?id=".$id."&nomQuizz=".$nomQuizz."&nbrQuest=".$nmbrQuest);
+			}
+			else
+			{
+				echo "non";
+			}
+
+		}
 	}
+	echo br(3);
+	?>
+	
+	<input type="submit" name="envoiRep" value="ENVOYER REPONSES !">
+</form>
+<?php
 
 
 
 
 
 
-
-
-	$this->load->view('ReponseCreation');
 	$this->load->view('Footer.html');
+
+
+	
 }
 
 
 
+public function CreateCle()
+{
 
+	$this->load->model('RequeteQuizz');
+	$this->load->view('Createcle');
+	$this->load->view('Footer.html');
+
+	$conteneur = '0123456789';
+    $cle = '';
+    $duree = $_POST['duree'];
+    $nomQuizz = $_GET['nomQuizz'];
+    $ID = $_GET['id'];
+    $Auteur = $this->RequeteQuizz->get_Name($ID);
+    $NombreQuestion = $_GET['nbrQuest'];
+
+    
+
+    if (isset($_POST['duree']) && $_POST['duree'] > 10) {
+    	 
+    	 for($i=1; $i<=7; $i++){
+        $cle .= $conteneur[rand(0, strlen($conteneur)-1)];
+
+
+
+    }
+    	$this->RequeteQuizz->set_Quizz($ID,$NombreQuestion,$nomQuizz,$cle,$duree,$Auteur);
+        echo "<h1 align=center><font color=green>".$cle."</font></h1>";
+
+
+    }
+     else
+    {
+    	echo "<font color=red>Entrer une durée comprise entre 10 minutes et 60 minutes pour générer une clé ! </font>";
+    }
+   
+    
+	
+
+}
 
 
 

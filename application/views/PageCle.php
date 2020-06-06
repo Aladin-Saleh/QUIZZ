@@ -18,6 +18,8 @@
 <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
 <div align="center"><br><br>
 	<form method="post" action="../Eleve/essaie">
+		<input type="text" name="nameEleve" id="moi" placeholder="Entrez Prénom et Nom !" value="<?php if(isset($name)){ echo $name; }?>">
+
 		<input type="text" name="nameCle" id="clef" placeholder="Entrez la clef !" value="<?php if(isset($name)){ echo $name; }?>">
 		
 			<br>

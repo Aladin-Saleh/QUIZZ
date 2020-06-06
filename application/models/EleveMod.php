@@ -9,20 +9,7 @@ class EleveMod extends CI_Model{
 		return $res->result_array();
 
 	}
-
-	/*public function Connect($cle){
-		Cette fonction j'en sais rien dutout
-
-		$cle =$this->input->post('nameCLe');
-		
-		$this->db->where('clé',$cle);
-		
-
-		$query = $this->db->get('Quizz');
-		
-		return $query;
-	}*/
-
+	
 	public function Connex($cle){
 
 		$this->db->select('Clé');
@@ -80,6 +67,25 @@ class EleveMod extends CI_Model{
 
         $recup = $query->row();
         return $recup->NOM;
+    }
+
+
+    public function set_Eleve($nom,$cleP,$cleQ){
+
+    	$this->db->set('Nom',$nom);
+		$this->db->set('CléPerso',$cleP);
+        $this->db->set('Clé', $cleQ);
+
+		//$this->db->set('Note',$note);
+
+		$this->db->insert('Eleve');
+    }
+
+
+    public function get_Eleve(){
+
+    	$this->db->set('Nom',$nom);
+    	$this->db->insert('Eleve');
     }
 
 }

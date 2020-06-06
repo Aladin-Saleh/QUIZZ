@@ -6,7 +6,7 @@
 
 <body>
 <div class="header">
-<h1 align="center"><?php echo $nomAuteur. '-' .$id.'-'.$cle.'-'.$NomQuizz ?></h1>
+<h1 align="center"><?php echo 'Bienvenue ' .$Eleve.' sur le Quizz '.'"'.$NomQuizz.'"';?></h1>
 </div><br><br>
 
 <!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
@@ -60,17 +60,18 @@
 		<h3 align="center" style="border: 1px solid #C82C3E; padding: 3px; background-color: #22C671;"> <?php echo $question[$i]?></h3><br>
 
 	<?php
-
+		
 		for($j=0; $j < $nombreRéponse[$i] ; $j++){
 			
 			if($numeroQuestion[$i] == $numeroRéponse[$k]){
 		?>
 
-		<form>
+		<form method="post" action="../EleveConnexion/resultat">
 		<fieldset>
 			<div align="center">
 			<label>
-				<input type="checkbox" name="reponse"> <?php echo $Réponse[$k] ?></label>
+				
+				<input type="checkbox" name="reponse[]" value="<?php echo $Réponse[$k] ?>" > <?php echo $Réponse[$k] ?></label>
 			</div>
 			
 
@@ -86,7 +87,7 @@
 	<hr><br>
 	
 	<div align="center">
-	<button type="submit">Envoyé</button>
+	<input type="submit" name="Resultat" value="Acceder à vos résultat">
 	</div>
 	</fieldset>
 	</form>

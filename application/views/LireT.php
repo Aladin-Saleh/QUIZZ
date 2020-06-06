@@ -12,7 +12,7 @@
 <?php
 	$data=array();
 	for($i=0;$i<= count($resultat)-1;$i++){
-		$data[]='Auteur :  '.$resultat[$i]['Auteur']. '->   Nom du Test :  ' . $resultat[$i]['NOM']. '->   La clé pour efféctuer le Test : ' . $resultat[$i]['Clé'] ;
+		$data[]='Auteur :  '.$resultat[$i]['Auteur']. ' ->   Nom du Test :  ' . $resultat[$i]['NOM']. ' ->   La clé pour efféctuer le Test : ' . $resultat[$i]['Clé'] ;
 	}
 		echo ul($data);
 	?>

@@ -13,7 +13,9 @@
 <h2>Consulter les statistiques des éléves :</h2>
 	<a href="<?php $id= $_GET['id']; echo $id;?>">STATISTIQUE ! </a>
 <h2>Créer un Quizz :</h2><br>
-	<a href="CreateQuizz?id=<?php $id= $_GET['id']; echo $id;?> ">CREER ! </a><br><br>
+	<a href="CreateQuizz?id=<?php $id= $_GET['id']; echo $id;?> ">CREER ! </a><br>
+<h2>Modifier un Quizz :</h2><br>
+	<a href="../ModifQuizzControl/Modif?id=<?php $id= $_GET['id']; echo $id;?> ">MODIFIER QUIZZ ! </a><br><br>
 </div>
 
 <div align="center"><br>

@@ -143,6 +143,17 @@ function set_Quizz($ID,$NombreQuestion,$nomQuizz,$Cle,$Duree,$Auteur)
 }
 
 
+function add_Quizz($ID)
+{
+
+	$this->db->set('NombrDeQuizz',+1);
+	$this->db->where('ID',$ID);
+
+
+	$this->db->update('membre');
+}
+
+
 
 
 

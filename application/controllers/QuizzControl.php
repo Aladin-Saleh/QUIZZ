@@ -87,6 +87,8 @@ public function pageCreation()
 	$nombre_question = $_GET['quest'];
 	$id = $_GET['id'];
 	$nom_Quizz = $this->input->post('nomQuizz');
+	$nom_quizz_ok = false;
+	$ok_rep = 0;
 
 	/*echo $nombre_question;*/
 
@@ -125,7 +127,14 @@ public function pageCreation()
 			</form>
 		</div>
 	<?php
-	
+	if (!empty($_POST['nomQuizz'])) {
+		$nom_quizz_ok = true;
+	}
+	else
+	{
+			echo '<font color="red">'."Il manque le nom du quizz à remplir !<br></font>";
+
+	}
 
 	for ($j=1; $j <= $nombre_question; $j++) { 
 		if (!empty($_POST['quest'.$j])) {
@@ -133,14 +142,23 @@ public function pageCreation()
 		}
 		else
 		{
-			echo '<font color="red">'."Il manque la question ".$j." à remplir<br></font>";
+			echo '<font color="red">'."Il manque la question ".$j." à remplir !<br></font>";
 
+		}
+
+
+		if (!empty($_POST['nombre_rep'.$j]) && $_POST['nombre_rep'.$j] >= 1 && $_POST['nombre_rep'.$j] <= 4) {
+			$ok_rep += 1;
+		}
+		else {
+			echo '<font color="red">'."Il manque la reponse ".$j." à remplir ( compris entre 1 et 4) !<br></font>";
+			
 		}
 	}
 
 		
 	
-if ($ok == ($j-1)) {/*Envoi dans la bd des questions*/
+if ($ok == ($j-1) && $nom_quizz_ok == true && $ok_rep == ($j-1)) {/*Envoi dans la bd des questions*/
 
 		for ($y=1; $y <= $nombre_question ; $y++) { 
 			$qstn = $this->input->post('quest'.$y);
@@ -300,7 +318,7 @@ public function CreateCle()
 
     
 
-    if (isset($_POST['duree']) && $_POST['duree'] > 10) {
+    if (isset($_POST['duree']) && ($_POST['duree'] >= 10 || $_POST['duree'] <= 60)) {
     	 
     	 for($i=1; $i<=7; $i++){
         $cle .= $conteneur[rand(0, strlen($conteneur)-1)];
@@ -309,6 +327,7 @@ public function CreateCle()
 
     }
     	$this->RequeteQuizz->set_Quizz($ID,$NombreQuestion,$nomQuizz,$cle,$duree,$Auteur);
+    	$this->RequeteQuizz->add_Quizz($ID);
         echo "<h1 align=center><font color=green>".$cle."</font></h1>";
 
 

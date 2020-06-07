@@ -22,7 +22,8 @@
 <div class="choix" style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
 	<h2 align="center"><a href="../InscControl/index">Inscription</a></h2>
 	<h2 align="center"><a href="../ConnexControl/Connexion">Connexion</a></h2>
-	<h2 align="center"><a href="../Eleve/index">Rejoindre un Quizz</a></h2><br>
+	<h2 align="center"><a href="../Eleve/index">Rejoindre un Quizz</a></h2>
+	<h2 align="center"><a href="../ELeve/result"> Résultat </a></h2><br>
 </div>
 
 

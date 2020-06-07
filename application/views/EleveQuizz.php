@@ -97,7 +97,7 @@
 			echo br(2);
 			
 		?>
-		<a href="../Eleve/index/">Retour</a>
+		<a href="../Eleve/index">Retour</a>
 	</div>
 
 </body>

@@ -57,16 +57,64 @@ class Eleve extends CI_Controller{
     }
   }
 
-  /*public function resultat(){
+public function result(){
+
+  $this->load->view('Header.html');
+  $this->load->view('PageClePerso');
+}
+
+public function affichageR(){
 
   
-   
-    //$data['cleEleve'] = $cle;
-    $donne['res']= $this->EleveMod->readtable('Reponse');
-    $donne['eleve']= $this->EleveMod->readtable('Eleve');
-    $this->load->view('Header.html');
-    $this->load->view('LeResultat',$donne);
-    $this->load->view('Footer.html');
-  }*/
+  $cle = $_POST['ClePerso'];
+  $TableEleve = $this->EleveMod->readtable('Eleve');
+
+  if(!empty($this->EleveMod->Connexion($cle))){
+
+  
+
+  for($i=0; $i <= count($TableEleve)-1; $i++){
+
+    if($cle == $TableEleve[$i]['CléPerso']){
+      
+      
+      $note = $TableEleve[$i]['Note'];
+      $cleQuizz = $TableEleve[$i]['Clé'];
+    }
+  }
+
+ 
+
+
+
+  $TableQuizz = $this->EleveMod->readtable('Quizz');
+
+  for($i=0; $i <= count($TableQuizz)-1; $i++){
+
+    if($cleQuizz == $TableQuizz[$i]['Clé']){
+
+      $expire = $TableQuizz[$i]['estExpiré'];
+      
+           
+    }
+  }
+
+if($expire == 1){
+$data['note'] = $note;
+
+$data['clePerso'] = $cle;
+$this->load->view('PageResultat',$data);
+}else{
+  $this->load->view('Erreur');
+}
+    
+}else{
+  echo "<h2>"."Ce compte n'existe pas"."</h2>";
+   $this->load->view('Header.html');
+  $this->load->view('PageClePerso');
+}
+
+
+}
 }
 ?>

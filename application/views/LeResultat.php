@@ -27,7 +27,7 @@ for($i=0;$i<= count($TableEleve)-1;$i++){
 
 	echo $r;*/
 	echo "<h1>".$Resultat. "</h1>";
-	echo 'nombre de bonne reponse totale : '. $oui;
+	/*echo 'nombre de bonne reponse totale : '. $oui;
 	echo ul($RealAns);
 	echo br(2);
 
@@ -35,7 +35,7 @@ for($i=0;$i<= count($TableEleve)-1;$i++){
 	echo ul($essaie);
 
 	echo br();
-	echo 'Voici le pourcentage de bonne réponses : '. $res.'%';
+	echo 'Voici le pourcentage de bonne réponses : '. $res.'%';*/
 
 ?>
 

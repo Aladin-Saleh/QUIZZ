@@ -61,22 +61,22 @@ $data['TableQuestion']= $this->EleveMod->readtable('Question');
 $data['TableQuizz']= $this->EleveMod->readtable('Quizz');
 $data['TableReponse']= $this->EleveMod->readtable('Reponse');
 
+$TableQuizz = $this->EleveMod->readtable('Quizz');
+for($i=0; $i <= count($TableQuizz)-1; $i++){
 
+	if($nameCle == $TableQuizz[$i]['Clé']){
 
+    $expire = $TableQuizz[$i]['estExpiré'];
+    }
+}
 
-
-$this->load->view('Header.html');
-$this->load->view('EleveQuizz',$data);
-$this->load->view('Footer.html');
-
-
-
-
-
-
-
-
-
+if($expire == 0){
+	$this->load->view('Header.html');
+	$this->load->view('EleveQuizz',$data);
+	$this->load->view('Footer.html');
+}else{
+	$this->load->view('ErreurQuizz');
+}
 
 }
 
@@ -102,8 +102,6 @@ public function resultat(){
 
 	$donne['Resultat'] = $r;
 
-	//$donne['TableEleve']= $this->EleveMod->readtable('Eleve');
-
 	$TableReponse = $this->EleveMod->readtable('Reponse');
 
 	$reponse = array();
@@ -113,7 +111,7 @@ public function resultat(){
 			if($TableReponse[$i]['BonneReponse'] == 1){
 
 				$Vraireponse[] = $TableReponse[$i]['Réponses'];
-				//$reponse[] = $TableReponse[$i]['BonneReponse'];
+				
 			}
 		}
 	}
@@ -125,16 +123,10 @@ public function resultat(){
 	$choix = array();
 	if(isset($_POST['reponse'])){
 
-		/*$nombre= $_POST['reponse'];
-		$total=count($nombre);*/
 		foreach($_POST['reponse'] as $valeur){
 			$choix[] = $valeur;
 
 		}
-		/*for( $i=0; $i<$total; $i++ )
-      {
-        $choix[] = $nombre[$i];
-      }*/
 	}
 	$donne['essaie'] = $choix;
 	
@@ -165,7 +157,7 @@ public function resultat(){
 	$donne['res'] = $Resultado;
 
 
-
+	$this->EleveMod->set_Resultat($Resultado,$r,$_SESSION['test']);
 
 
 

@@ -75,17 +75,41 @@ class EleveMod extends CI_Model{
     	$this->db->set('Nom',$nom);
 		$this->db->set('CléPerso',$cleP);
         $this->db->set('Clé', $cleQ);
+        
+        $this->db->insert('Eleve');
+    }
 
-		//$this->db->set('Note',$note);
+    public function set_Resultat($res,$clePerso,$nom){
 
-		$this->db->insert('Eleve');
+        $this->db->set('Note', $res);
+        $this->db->where('Nom',$nom);
+        $this->db->where('CléPerso', $clePerso);
+
+
+        $this->db->update('Eleve');
     }
 
 
-    public function get_Eleve(){
 
-    	$this->db->set('Nom',$nom);
-    	$this->db->insert('Eleve');
+
+    public function Connexion($cle){
+
+        $this->db->select('CléPerso');
+        $this->db->from('Eleve');
+        $this->db->where('CléPerso',$cle);
+
+        $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
+ 
+      return $query->result();
+      
+    } else {
+      
+      return false;
+    }
+
+        
     }
 
 }

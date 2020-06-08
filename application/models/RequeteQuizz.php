@@ -154,6 +154,21 @@ function add_Quizz($ID)
 }
 
 
+function set_Image($ID,$NomQuizz,$numQuest,$addr)
+{
+
+	$this->db->set('Image',$addr);
+	$this->db->where('ID',$ID);
+	$this->db->where('NomQuizz',$NomQuizz);
+	$this->db->where('Numéro',$numQuest);
+
+
+
+
+	$this->db->update('Question');
+}
+
+
 
 
 

@@ -51,8 +51,44 @@ $this->load->model('RequeteModif');
 public function StatCle()
 {
 
-	$this->load->view('StatCle');
+	$id = $_GET['id'];
+	$cle = $_GET['cle'];
+	$msg = "";
+
+		$this->load->model('ModelStat');
+
+
+
+
+
+
+	
+	$note = $this->ModelStat->get_Note($cle,'Eleve');
+	$data['moyenne'] = $note;
+
+	if ($note > 50 && $note < 70) {
+		$msg = 	"Vos éleves ont tout juste la moyenne ! Ils ne se sont pas foulé !";
+	}
+
+	if ($note > 0 && $note < 50) {
+		$msg = 	"Vos éleves ont des notes SCAN-DA-LEUSE ! Peut être que le problème c'est vous ! ";
+	}
+
+	if ($note > 70 && $note <= 100) {
+		$msg = 	"Vos éleves sont EXC-ELL-ENT ! Vous pouvez être fiere de vous !";
+	}
+
+	$data['msg'] = $msg;
+
+	//echo $note;
+	
+
+	$this->load->view('StatCle',$data);
 	$this->load->view('Footer.html');
+
+	
+
+
 
 }
 

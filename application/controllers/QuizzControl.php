@@ -68,7 +68,7 @@ public function CreateQuizz()
 	$nmbr_question = $this->input->post('nombreQstn');
 
 		$_SESSION['quest'] = $nmbr_question;
-	if (isset($nmbr_question) AND $nmbr_question > 0 AND $nmbr_question < 40) {
+	if (isset($nmbr_question) AND $nmbr_question > 0 AND $nmbr_question <= 40) {
 		echo "ok";
 		header("Location: pageCreation?id=".$_SESSION['id']."&quest=".$_SESSION['quest']); /*On met l'id de l'utilisateur pour pouvoir apres l'envoyé à la bd à la fin du 																								quizz + le nombre de question pour pouvoir le recup apres */
 	}
@@ -115,8 +115,9 @@ public function pageCreation()
 		?>
 		<h2>Question n°<?php echo $i;?></h2>
 
-		<input type="text" name="quest<?php echo $i;?>" value="<?php  if(isset($quest)){ echo $quest;}/*pour ne pas réecrire ses question*/?>" >
+		<input type="text" placeholder="Entrer votre question" name="quest<?php echo $i;?>" value="<?php  if(isset($quest)){ echo $quest;}/*pour ne pas réecrire ses question*/?>" >
 		<input type="number" placeholder="Nombre de réponses" name="nombre_rep<?php echo $i?>">
+		<p>Ajouter une image (optionnel)</p><input type="text" placeholder="Entrer l'adresse de votre image" name="image<?php echo $i;?>">
 		
 		<br>
 		<?php
@@ -127,6 +128,13 @@ public function pageCreation()
 			</form>
 		</div>
 	<?php
+
+
+
+
+
+
+
 	if (!empty($_POST['nomQuizz'])) {
 		$nom_quizz_ok = true;
 	}
@@ -136,9 +144,13 @@ public function pageCreation()
 
 	}
 
+
+
 	for ($j=1; $j <= $nombre_question; $j++) { 
 		if (!empty($_POST['quest'.$j])) {
 			$ok += 1;
+
+			
 		}
 		else
 		{
@@ -165,6 +177,14 @@ if ($ok == ($j-1) && $nom_quizz_ok == true && $ok_rep == ($j-1)) {/*Envoi dans l
 			$nbr_Rep = $this->input->post('nombre_rep'.$y);
 			$this->RequeteQuizz->envoi_question_db($id,$qstn,$nbr_Rep,$y,$nom_Quizz);
 		}
+
+		for ($z=1; $z <= $nombre_question ; $z++) { 
+	
+	if (isset($_POST['image'.$z])) {
+		$img = htmlspecialchars($_POST['image'.$z]);
+		$this->RequeteQuizz->set_Image($id,$nom_Quizz,$z,$img);
+	}
+}
 		header("Location: Question?id=".$_SESSION['id']."&nbrQuest=".$_SESSION['nquest']."&nom=".$_SESSION['nom']);
 	}
 
@@ -270,13 +290,13 @@ public function Reponse()
 			<input type="checkbox" name="bonneRep<?php echo $i.$j; ?>">
 			<?php
 			if (isset($_POST['bonneRep'.$i.$j])) {
-				echo "ok";
+				//echo "ok";
 				$this->RequeteQuizz->set_true($id,$nomQuizz,$i,$j);
 				header("Location: CreateCle?id=".$id."&nomQuizz=".$nomQuizz."&nbrQuest=".$nmbrQuest);
 			}
 			else
 			{
-				echo "non";
+				//echo "non";
 			}
 
 		}
@@ -310,7 +330,7 @@ public function CreateCle()
 
 	$conteneur = '0123456789';
     $cle = '';
-    $duree = $_POST['duree'];
+    
     $nomQuizz = $_GET['nomQuizz'];
     $ID = $_GET['id'];
     $Auteur = $this->RequeteQuizz->get_Name($ID);
@@ -318,7 +338,8 @@ public function CreateCle()
 
     
 
-    if (isset($_POST['duree']) && ($_POST['duree'] >= 10 || $_POST['duree'] <= 60)) {
+  if (isset($_POST['valide'])) {
+  	  if (!empty($_POST['duree']) && $_POST['duree'] <= 60) {
     	 
     	 for($i=1; $i<=7; $i++){
         $cle .= $conteneur[rand(0, strlen($conteneur)-1)];
@@ -326,6 +347,7 @@ public function CreateCle()
 
 
     }
+    $duree = $_POST['duree'];
     	$this->RequeteQuizz->set_Quizz($ID,$NombreQuestion,$nomQuizz,$cle,$duree,$Auteur);
     	$this->RequeteQuizz->add_Quizz($ID);
         echo "<h1 align=center><font color=green>".$cle."</font></h1>";
@@ -334,8 +356,9 @@ public function CreateCle()
     }
      else
     {
-    	echo "<font color=red>Entrer une durée comprise entre 10 minutes et 60 minutes pour générer une clé ! </font>";
+    	echo "<font color=red>Entrer une durée comprise entre 1 minute et 60 minutes pour générer une clé ! </font>";
     }
+  }
    
     
 	

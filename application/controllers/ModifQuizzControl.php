@@ -34,15 +34,34 @@ public function Modif()
 		else
 		{
 
-			echo "nop";
+			//echo "nop";
 		}
 
 		
 	}
 	else
 	{
-		echo "non";
+		//echo "non";
 	}
+
+	if (isset($_POST['subCleExpire'])) {
+		$cleB = htmlspecialchars($_POST['cleEx']);
+		if (!empty($cleB)) {
+			header("Location: ExpireB?id=".$id."&cle=".$cleB);
+		}
+		else
+		{
+
+			//echo "nop";
+		}
+
+		
+	}
+	else
+	{
+		//echo "non";
+	}
+	
 			
 	
 	
@@ -208,6 +227,36 @@ public function Expire()
 
 
 }
+
+public function ExpireB()
+{
+	$this->load->model('RequeteModif');
+	$this->load->model('RequeteQuizz');
+	$this->load->view('EstExpire.html');
+	$this->load->view('Footer.html');
+
+	$cle = $_GET['cle'];
+	$id = $_GET['id'];
+	$NomQuizz = $this->RequeteModif->get_Name_QuizzCle($id,$cle);
+
+
+	if (isset($_POST['estExpire'])) {
+		
+		if ($_POST['expire'] == "oui") {
+			$this->RequeteModif->set_true($id,$NomQuizz,$cle);
+			header("Location: ../QuizzControl/index?id=".$id);
+
+		}
+		else
+		{
+			$this->RequeteModif->set_false($id,$NomQuizz,$cle);
+			header("Location: ../QuizzControl/index?id=".$id);
+		}
+	}
+
+
+}
+
 
 
 

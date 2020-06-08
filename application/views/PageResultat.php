@@ -21,10 +21,13 @@ echo $clePerso;
 
 echo br(2);
 
-echo 'VOICI votre resultat !!! : '. $note.'%';
+echo 'Voici votre resultat !!! : '. $note.'%';
 
 
 ?>
+<br>
+<br>
+<p>NB: Vous ne pouvez accéder à la note de votre quizz dès lors que le professeur l'aura rendu expiré.<br>Si il n'y a pas de note, essayer plus tard !</p>
 
 <div align="center"><br><br>
 <a href="../PageAccueil/">Retour</a>

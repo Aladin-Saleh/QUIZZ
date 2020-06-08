@@ -11,6 +11,8 @@
 		<h1 align="center">Entré votre clé personnel </h1><br><br>
 	</div>
 
+	
+
 	<div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
 <div align="center"><br><br>
 	<form method="post" action="../Eleve/affichageR">

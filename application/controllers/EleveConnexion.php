@@ -67,8 +67,11 @@ for($i=0; $i <= count($TableQuizz)-1; $i++){
 	if($nameCle == $TableQuizz[$i]['Clé']){
 
     $expire = $TableQuizz[$i]['estExpiré'];
+    $temps = $TableQuizz[$i]['Durée'];
     }
 }
+
+$data['time'] = $temps;
 
 if($expire == 0){
 	$this->load->view('Header.html');

@@ -1,13 +1,19 @@
-<!DOCTYPE html>
+
 <link rel="stylesheet" href="http://www.iut-fbleau.fr/css/tacit.css">
 <html>
 <head>
+	
+
+
 </head>
 
-<body>
+<body onload="decompte();">
+
 <div class="header">
 <h1 align="center"><?php echo 'Bienvenue ' .$Eleve.' sur le Quizz '.'"'.$NomQuizz.'"';?></h1>
+
 </div><br><br>
+<div id="Temps"></div>
 
 <!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
 
@@ -53,6 +59,8 @@
 
 		}
 	}
+	
+
 
 /*Ici la boucle permet d'afficher les questions et réponses dans la page*/
 	for($i=0; $i < $nombreQuestion; $i++){
@@ -99,6 +107,43 @@
 		?>
 		<a href="../Eleve/index">Retour</a>
 	</div>
+
+
+	<script type="text/javascript"> 
+
+<?php $res = $time*60;?>
+var total = <?php echo json_encode($time);?>;
+var res = 59;
+var x ;
+ 
+function decompte()
+{
+    if(total>1)
+    {
+    	
+        document.getElementById("Temps").innerHTML = "Il vous reste " + total + " minutes";
+        total-- ;
+        x = setTimeout(decompte,60000) ;
+    }
+    else
+    {
+    	if(res >= 0){
+    	document.getElementById("Temps").innerHTML = "Il vous reste " + res + " secondes";
+        res-- ;
+        z = setTimeout(decompte,1000) ;
+    	}else{
+
+    		//document.write("Il fallait valider votre Quizz !!!!");
+    		window.location.href = "../PageAccueil/";
+        clearTimeout(z) ;
+    	}
+
+        clearTimeout(x) ;
+    }
+     
+}
+
+</script>
 
 </body>
 </html>

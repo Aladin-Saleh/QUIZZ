@@ -1,21 +1,19 @@
-
+<!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
+<!DOCTYPE html>
 <link rel="stylesheet" href="http://www.iut-fbleau.fr/css/tacit.css">
 <html>
 <head>
-	
-
-
 </head>
-
 <body onload="decompte();">
 
 <div class="header">
 <h1 align="center"><?php echo 'Bienvenue ' .$Eleve.' sur le Quizz '.'"'.$NomQuizz.'"';?></h1>
 
 </div><br><br>
+<p align="center" style="border: 1px solid #C82C3E; font-weight:bold;"> Validé vos réponses avant la fin du timing sinon vous perdez toutes vos données !!!!</p>
 <div id="Temps"></div>
 
-<!-- Cette page est l'affiche du Quizz donc affichage des questions,réponses. La page permet à l'utilisateur de répondre au quizz et valider ses réponses-->
+<!--___________________________________________________________________________________________________________________________________________-->
 
 <?php
 
@@ -37,6 +35,7 @@
 		$question[]=$TableQuestion[$i]['Questions'];
 		$numeroQuestion[] = $TableQuestion[$i]['Numéro'];
 		$nombreRéponse[] = $TableQuestion[$i]['NombreRéponse'];
+		$image[] = $TableQuestion[$i]['Image'];
 
 		}
 	}
@@ -60,12 +59,15 @@
 		}
 	}
 	
-
+/*_________________________________________________________________________________________________________________________________*/
 
 /*Ici la boucle permet d'afficher les questions et réponses dans la page*/
 	for($i=0; $i < $nombreQuestion; $i++){
 		?>
 		<h3 align="center" style="border: 1px solid #C82C3E; padding: 3px; background-color: #22C671;"> <?php echo $question[$i]?></h3><br>
+		<div  align="center" >
+		<img src="<?php echo $image[$i] ?>" height="0" width="200">
+		</div><br>
 
 	<?php
 		
@@ -81,6 +83,7 @@
 				
 				<input type="checkbox" name="reponse[]" value="<?php echo $Réponse[$k] ?>" > <?php echo $Réponse[$k] ?></label>
 			</div>
+
 			
 
 
@@ -108,6 +111,7 @@
 		<a href="../Eleve/index">Retour</a>
 	</div>
 
+<!--_________________________________________________________________________________________________________________________________________________-->
 
 	<script type="text/javascript"> 
 

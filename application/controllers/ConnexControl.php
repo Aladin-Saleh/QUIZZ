@@ -25,6 +25,9 @@ public function Connexion()
 {
 
 
+if (isset($_POST['Retour'])) {
+  header("Location: ../PageAccueil/");
+}
 
 	if(isset($_POST['subConn'])) 
  {

@@ -7,6 +7,16 @@ class Eleve extends CI_Controller{
 		$this->load->view('Header.html');
 		$this->load->view('PageCle.php');
 		$this->load->view('Footer.html');
+
+
+
+
+    if (isset($_POST['Retour'])) {
+      header("Location: ../PageAccueil/");
+    }
+
+
+
 	}
   public function listerunetable(){
 /*Cette fonction permet de lire dans la table "Quizz" et ainsi afficher les données de la db pour informer l'utilisateur des différentes clés existante*/
@@ -61,6 +71,10 @@ public function result(){
 
   $this->load->view('Header.html');
   $this->load->view('PageClePerso');
+
+  if (isset($_POST['Retour'])) {
+  header("Location: ../PageAccueil/");
+}
 }
 
 public function affichageR(){

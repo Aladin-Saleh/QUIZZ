@@ -8,7 +8,7 @@
 <body>
 	
 <br><br><br>
-<h2> Attention le Quizz n'est pas encore Expiré !!!! </h2>
+<h2> Attention le Quizz n'est pas encore expiré ! </h2>
 
 
 <div align="center"><br><br>

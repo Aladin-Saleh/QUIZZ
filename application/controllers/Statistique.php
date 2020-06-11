@@ -20,10 +20,12 @@ public function Stats()
 
 
 $this->load->model('RequeteModif');
+$this->load->model('ModelStat');
 	$id = $_GET['id'];
 
-	
-
+if (isset($_POST['RETOUR'])) {
+	header("Location: ../QuizzControl/index?id=".$id);
+}
 
 	
 	$data['resultat'] = $this->RequeteModif->readtables('Quizz',$id);
@@ -33,8 +35,16 @@ $this->load->model('RequeteModif');
 
 	if (isset($_POST['subCle'])) {
 		if (!empty($_POST['cle'])) {
-			$cle = htmlspecialchars($_POST['cle']);
-			header("Location: StatCle?id=".$id."&cle=".$cle);
+				$cle = htmlspecialchars($_POST['cle']);
+			if ($this->ModelStat->cle_exist($cle) > 0) {
+				
+				header("Location: StatCle?id=".$id."&cle=".$cle);
+			}
+			else
+			{
+				echo "Clé invalide";
+			}
+			
 		}
 		else
 		{

@@ -27,7 +27,9 @@
 </div>
 
 <div align="center"><br>
-	<a href="../PageAccueil/">Retour</a>
+	<form action="" method="post">
+		<input type="submit" name="Retour" value="RETOUR">
+	</form>
 </div>
 </body>
 

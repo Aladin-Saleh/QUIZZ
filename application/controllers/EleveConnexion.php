@@ -16,6 +16,10 @@ public function index()
 	$this->load->model('RequeteQuizz');
 	$this->load->model('EleveMod');
 
+	if (isset($_POST['Retour'])) {
+  header("Location: ../PageAccueil/");
+}
+
 	if (isset($_GET['id'] )) {
 		$id_int = intval($_GET['id']);
 		$msg_erreur = "Val bien def";

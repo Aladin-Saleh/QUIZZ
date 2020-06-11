@@ -20,6 +20,11 @@ public function __construct(){
 public function index()
 {
 
+    
+if (isset($_POST['Retour'])) {
+  header("Location: ../PageAccueil/");
+}
+
 	if(isset($_POST['subInsciption'])) 
  {
   

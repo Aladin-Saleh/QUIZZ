@@ -54,6 +54,12 @@ public function index()
 $this->load->view('Header.html');
 $this->load->view('Quizz',$data);
 $this->load->view('Footer.html');
+
+
+
+if (isset($_POST['Retour'])) {
+	header("Location: ../PageAccueil/");
+}
 }
 
 

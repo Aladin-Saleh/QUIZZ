@@ -22,6 +22,15 @@ function get_Note($Cle)
 
 }
 
+function cle_exist($cle)
+{
+
+	$this->db->where('Clé',$cle);
+
+		$query = $this->db->get('Eleve');
+		
+			return $query->num_rows();
+}
 
 
 

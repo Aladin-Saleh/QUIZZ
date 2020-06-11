@@ -42,7 +42,10 @@ echo br(2);
 <?php
 echo br(3);
 ?>
-<a href="../PageAccueil/">Retour</a>
+<form action="" method="post">
+	
+	<input type="submit" name="Retour" value="RETOUR">
+</form>
 </div>
 
 </body>

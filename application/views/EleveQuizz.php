@@ -103,13 +103,11 @@
 	</fieldset>
 	</form>
 
-	<div align="center">
-		<?php 
-			echo br(2);
-			
-		?>
-		<a href="../Eleve/index">Retour</a>
-	</div>
+	<div align="center"><br>
+	<form action="" method="post">
+		<input type="submit" name="Retour" value="RETOUR">
+	</form>
+</div>
 
 <!--_________________________________________________________________________________________________________________________________________________-->
 

@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 
 class ConnexControl extends CI_Controller {
 
@@ -42,14 +42,14 @@ public function Connexion()
           	if( $this->RequetesConn->Connect($_POST['mailCon'],$_POST['mdpCon'])> 0 )
           	{
 
-              $ID = $this->RequetesConn->get_ID($_POST['mailCon'],$_POST['mdpCon']);
+              $ID = $this->RequetesConn->get_ID($_POST['mailCon']);
                 $msg_erreur = "Accepté";
                 $msg_erreur =$ID;
 
-                $_SESSION['id'] = $ID;
+               // $_SESSION['id'] = $ID;
                
                
-              header("Location: ../QuizzControl/index?id=".$_SESSION['id']);
+              header("Location: ../QuizzControl/index?id=".$ID);
           	}
           	
           	else

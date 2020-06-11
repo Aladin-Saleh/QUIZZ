@@ -2,19 +2,19 @@
 			
 class RequetesInscr extends CI_Model{ /*Fonction qui contient la requete : INSERT INTO membre(prenom,mail,MDP) VALUES("$name","$addr_mail","$mdp")*/
 
-function insc()
+function insc($name,$mdp,$addr_mail)
 {
 
- $name = htmlspecialchars($_POST['Prenom']);
-         $addr_mail = htmlspecialchars($_POST['mail']);
-         $mdp = $_POST['mdp']; // pas de hashage pour le moment parce que y'a un souci 
+ 		$nameS = htmlspecialchars($name);
+         $addr_mailS = htmlspecialchars($addr_mail);
+         $mdpS = password_hash($mdp, PASSWORD_DEFAULT); // pas de hashage pour le moment parce que y'a un souci 
 
      
 
           
-				$this->db->set('MDP',$mdp);
-                $this->db->set('mail',$addr_mail);
-                $this->db->set('prenom',$name);
+				$this->db->set('MDP',$mdpS);
+                $this->db->set('mail',$addr_mailS);
+                $this->db->set('prenom',$nameS);
                 $this->db->insert('membre');
                  
 

@@ -33,7 +33,7 @@ public function index()
                  } else
                  {
             
-			     $this->RequetesInscr->insc();
+			     $this->RequetesInscr->insc($_POST['Prenom'],$_POST['mdp'],$_POST['mail']);
                   header("Location: ../PageAccueil/");
               }
          }

@@ -3,22 +3,27 @@
 class EleveMod extends CI_Model{
 
 
-	public function readtable($table){
-/*Cette fonction permet de lire la db et de la retourner*/
-		$res= $this->db->get($table);
-		return $res->result_array();
+    public function readtable($table){
 
-	}
-	
-	public function Connex($cle){
+    /*Cette fonction permet de lire la db et de la retourner*/
 
-		$this->db->select('Clé');
-		$this->db->from('Quizz');
-		$this->db->where('Clé',$cle);
+        $res= $this->db->get($table);
+        return $res->result_array();
 
-		$query = $this->db->get();
+    }
+/*_______________________________________________________________________________________________________________________________________________________*/
 
-	if ($query->num_rows() > 0) {
+    /*Elle permet de vérifier si la $cle existe bien*/
+    
+    public function Connex($cle){
+
+        $this->db->select('Clé');
+        $this->db->from('Quizz');
+        $this->db->where('Clé',$cle);
+
+        $query = $this->db->get();
+
+    if ($query->num_rows() > 0) {
  
       return $query->result();
       
@@ -27,24 +32,29 @@ class EleveMod extends CI_Model{
       return false;
     }
 
-		
-	}
+        
+    }
 
+/*_______________________________________________________________________________________________________________________________________________________*/
 
-	public function getID($cle){
+    /*La fontion retourne l'id de l'utilisateur*/
 
-		$leResultat['ID']=array();
-		$this->db->select('ID');
-		$this->db->where('Clé',$cle);
-		
+    public function getID($cle){
 
-		$query = $this->db->get('Quizz');
+        $leResultat['ID']=array();
+        $this->db->select('ID');
+        $this->db->where('Clé',$cle);
+        
 
-		$recup = $query->row();
-		return $recup->ID;
-	}
+        $query = $this->db->get('Quizz');
 
-	public function getKey($id){
+        $recup = $query->row();
+        return $recup->ID;
+    }
+/*_______________________________________________________________________________________________________________________________________________________*/
+
+    /* La fonction retourne la clé du Quizz en fonction de l'id*/
+    public function getKey($id){
 
         $result['Clé']=array();
         $this->db->select('Clé');
@@ -56,6 +66,9 @@ class EleveMod extends CI_Model{
         $recup = $query->row();
         return $recup->Clé;
     }
+/*_______________________________________________________________________________________________________________________________________________________*/
+
+    /* La fonction retourne le nom du Quizz en fonction de la clé*/
 
     public function getName($cle){
 
@@ -69,19 +82,26 @@ class EleveMod extends CI_Model{
         return $recup->NOM;
     }
 
+/*_______________________________________________________________________________________________________________________________________________________*/
+
+    /* Cette fonction permet d'ajouter le nom, la clé Personnel et la clé du Quizz dans la table Eleve*/
 
     public function set_Eleve($nom,$cleP,$cleQ){
 
-    	$this->db->set('Nom',$nom);
-		$this->db->set('CléPerso',$cleP);
+        $this->db->set('Nom',$nom);
+        $this->db->set('CléPerso',$cleP);
         $this->db->set('Clé', $cleQ);
         
         $this->db->insert('Eleve');
     }
+/*_______________________________________________________________________________________________________________________________________________________*/
 
-    public function set_Resultat($res,$clePerso,$nom){
+    /*Cette fonction permet d'ajouter la note à la table Eleve*/
+
+    public function set_Resultat($res,$clePerso,$nom,$mauvaiseRep){
 
         $this->db->set('Note', $res);
+        $this->db->set('MauvaiseReponse', $mauvaiseRep);
         $this->db->where('Nom',$nom);
         $this->db->where('CléPerso', $clePerso);
 
@@ -90,8 +110,10 @@ class EleveMod extends CI_Model{
     }
 
 
+/*_______________________________________________________________________________________________________________________________________________________*/
 
-
+    /*Ici cela permet de vérifier si la clé personne existe bien dans la table*/
+    
     public function Connexion($cle){
 
         $this->db->select('CléPerso');

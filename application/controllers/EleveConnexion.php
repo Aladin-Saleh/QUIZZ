@@ -3,22 +3,24 @@ session_start();
 
 class EleveConnexion extends CI_Controller {
 
-public function __construct()
-{
+
+
+
+public function __construct(){
+
    	parent::__construct();
     $this->load->database();
 
 }
 
-public function index()
-{
+/*_______________________________________________________________________________________________________________________________________________________*/
+
+/* Cette fonction sert à afficher le Quizz pour l'élève et à transmettre des données à "EleveQuizz".*/
+
+public function index(){
 
 	$this->load->model('RequeteQuizz');
 	$this->load->model('EleveMod');
-
-	if (isset($_POST['Retour'])) {
-  header("Location: ../PageAccueil/");
-}
 
 	if (isset($_GET['id'] )) {
 		$id_int = intval($_GET['id']);
@@ -28,14 +30,10 @@ public function index()
 			if (isset($prenom_user)) {
 				$msg_erreur_bis = "prenom_user bien def";
 
-			}
-			else
-			{
+			}else{
 				$msg_erreur_bis =" Probleme avec le nom ";			
 			}
-	}
-	else
-	{
+	}else{
 		$msg_erreur = "Y'a un probleme avec l'ID";
 	}
 
@@ -43,57 +41,75 @@ public function index()
 	if (isset($msg_erreur)) {
 		if (isset($msg_erreur_bis)) {
 			$data['nomAuteur']= $prenom_user;
-}
-}
+		}
+	}
 
-$Eleve = $_GET['eleve'];
-$data['Eleve'] = $Eleve;
-$_SESSION['test'] = $Eleve;
+	$Eleve = $_GET['eleve'];
+	$data['Eleve'] = $Eleve;
+	$_SESSION['test'] = $Eleve;
 
-$nameCle = intval($_GET['cle']);;
-$data['cle'] = $nameCle;
-$_SESSION['cle'] = $nameCle;
+	$nameCle = intval($_GET['cle']);;
+	$data['cle'] = $nameCle;
+	$_SESSION['cle'] = $nameCle;
 
-$nomQuizz= $this->EleveMod->getName($nameCle);
-$data['NomQuizz'] = $nomQuizz;
-$_SESSION['nom'] = $nomQuizz;
+	$nomQuizz= $this->EleveMod->getName($nameCle);
+	$data['NomQuizz'] = $nomQuizz;
+	$_SESSION['nom'] = $nomQuizz;
 
-$data['id'] = $id_int;
-$_SESSION['id'] = $id_int;
+	$data['id'] = $id_int;
+	$_SESSION['id'] = $id_int;
 
-$data['TableQuestion']= $this->EleveMod->readtable('Question');
-$data['TableQuizz']= $this->EleveMod->readtable('Quizz');
-$data['TableReponse']= $this->EleveMod->readtable('Reponse');
+	$data['TableQuestion']= $this->EleveMod->readtable('Question');
+	$data['TableQuizz']= $this->EleveMod->readtable('Quizz');
+	$data['TableReponse']= $this->EleveMod->readtable('Reponse');
 
-$TableQuizz = $this->EleveMod->readtable('Quizz');
-for($i=0; $i <= count($TableQuizz)-1; $i++){
+	$TableQuizz = $this->EleveMod->readtable('Quizz');
 
-	if($nameCle == $TableQuizz[$i]['Clé']){
+	for($i=0; $i <= count($TableQuizz)-1; $i++){
 
-    $expire = $TableQuizz[$i]['estExpiré'];
-    $temps = $TableQuizz[$i]['Durée'];
-    }
-}
+		if($nameCle == $TableQuizz[$i]['Clé']){
 
-$data['time'] = $temps;
+	    $expire = $TableQuizz[$i]['estExpiré'];
+	    $temps = $TableQuizz[$i]['Durée'];
+	    }
+	}
 
-if($expire == 0){
-	$this->load->view('Header.html');
-	$this->load->view('EleveQuizz',$data);
-	$this->load->view('Footer.html');
-}else{
-	$this->load->view('ErreurQuizz');
-}
+	$data['time'] = $temps;
 
-}
+	if($expire == 0){
+		$this->load->view('Header.html');
+		$this->load->view('EleveQuizz',$data);
+		$this->load->view('Footer.html');
+	}else{
+		$this->load->view('ErreurQuizz');
+	}
+
+	}
+
+/*_______________________________________________________________________________________________________________________________________________________*/
+
+/*Cette fonction affiche la page après que l'élève valide les réponses de son Quizz.*/
 
 public function resultat(){
+
+	
 
 
   	$donne['cle'] =$_SESSION['cle'];
     $donne['eleve'] = $_SESSION['test'];
     $donne['id'] = $_SESSION['id'];
     $donne['nomQuizz'] = $_SESSION['nom'];
+
+    $TableQuizz = $this->EleveMod->readtable('Quizz');
+
+	for($i=0;$i<= count($TableQuizz)-1;$i++){				
+
+		if($_SESSION['nom'] == $TableQuizz[$i]['NOM']){
+			$nombreQuestion=$TableQuizz[$i]['NombreQuestion'];
+		}
+	}
+
+	$donne['nombreQuestion'] = $nombreQuestion;
 
     $TableEleve = $this->EleveMod->readtable('Eleve');
 
@@ -123,39 +139,63 @@ public function resultat(){
 		}
 	}
 
+	
+
 	$nombreBonneRéponsesTotal = count($Vraireponse);
 	$donne['oui'] = $nombreBonneRéponsesTotal;
 	$donne['RealAns'] = $Vraireponse;
 
-	$choix = array();
+	$mauvaiseRep = 0;
+	$k=0;
+	$fa = array();
+	
 	if(isset($_POST['reponse'])){
 
 		foreach($_POST['reponse'] as $valeur){
-			$choix[] = $valeur;
-
-		}
-	}
-	$donne['essaie'] = $choix;
-	
-	$nombreBonneReponseEleve = 0;
-
-	for($i=0;$i<= count($TableReponse)-1;$i++){
-
-		if($TableReponse[$i]['NomQuizz'] == $_SESSION['nom']){
 			
-			for($k=0; $k < count($choix); $k++){
+			for($i=0;$i<= count($TableReponse)-1;$i++){
 
-				if($choix[$k] == $TableReponse[$i]['Réponses']){
-					if($TableReponse[$i]['BonneReponse'] == 1){
-						$nombreBonneReponseEleve = $nombreBonneReponseEleve + 1;
-					}
+				if($TableReponse[$i]['NomQuizz'] == $_SESSION['nom']){
+					
+					
+
+						if($valeur == $TableReponse[$i]['Réponses']){
+							if($TableReponse[$i]['BonneReponse'] == 1){
+								$fa[] = $TableReponse[$i]['Réponses'] ;
+							}else{
+								$mauvaiseRep += 1;
+							}
+						$k=$k+1;
+						}
 					
 				}
 			}
 		}
 	}
 	
+	/*for($i=0;$i<= count($TableReponse)-1;$i++){
 
+		if($TableReponse[$i]['NomQuizz'] == $_SESSION['nom']){
+			
+			
+
+				if($choix[$k] == $TableReponse[$i]['Réponses']){
+					if($TableReponse[$i]['BonneReponse'] == 1){
+						$fa[] = $TableReponse[$i]['Réponses'] ;
+					}
+				$k=$k+1;
+				}
+			
+		}
+	}*/
+	$donne['mauvaiseRep'] = $mauvaiseRep;
+
+	$note = $nombreQuestion - ($mauvaiseRep/2);
+	$donne['note'] = $note;
+	
+	$nombreBonneReponseEleve = count($fa);
+
+	$donne['essaie'] = $fa;
 
 	$donne['Remi'] = $nombreBonneReponseEleve;
 
@@ -164,7 +204,7 @@ public function resultat(){
 	$donne['res'] = $Resultado;
 
 
-	$this->EleveMod->set_Resultat($Resultado,$r,$_SESSION['test']);
+	$this->EleveMod->set_Resultat($Resultado,$r,$_SESSION['test'], $mauvaiseRep);
 
 
 

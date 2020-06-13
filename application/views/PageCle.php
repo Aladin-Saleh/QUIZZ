@@ -20,7 +20,7 @@
 	<form method="post" action="../Eleve/essaie">
 		<input type="text" name="nameEleve" id="moi" placeholder="Entrez Prénom et Nom !" value="<?php if(isset($name)){ echo $name; }?>">
 
-		<input type="text" name="nameCle" id="clef" placeholder="Entrez la clef !" value="<?php if(isset($name)){ echo $name; }?>">
+		<input type="text" name="nameCle" id="clef" placeholder="Entrez la clé !" value="<?php if(isset($name)){ echo $name; }?>">
 		
 			<br>
 		<input type="submit" name="Valide" value="Validé !">

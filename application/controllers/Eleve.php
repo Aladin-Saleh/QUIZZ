@@ -9,6 +9,13 @@ class Eleve extends CI_Controller{
     $this->load->view('Header.html');
     $this->load->view('PageCle.php');
     $this->load->view('Footer.html');
+
+  if (isset($_POST['Retour'])) {
+    header("Location: ../PageAccueil/");
+  }
+
+
+    
   }
 
 /*_______________________________________________________________________________________________________________________________________________________*/
@@ -65,6 +72,11 @@ class Eleve extends CI_Controller{
     $this->load->view('Footer.html');
     }
     }
+
+
+
+
+
   }
 
 /*_______________________________________________________________________________________________________________________________________________________*/
@@ -75,6 +87,11 @@ public function result(){
 
   $this->load->view('Header.html');
   $this->load->view('PageClePerso');
+
+  if (isset($_POST['Retour'])) {
+    header("Location: ../PageAccueil/");
+  }
+
 }
 
 /*_______________________________________________________________________________________________________________________________________________________*/

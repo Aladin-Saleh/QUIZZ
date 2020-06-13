@@ -55,6 +55,15 @@
 
 	</form>
 
+	<div align="center">
+				
+				<form action="" method="post">
+					<input type="submit" name="Annule" value="ANNULER">
+
+				</form>
+
+		</div>
+
 	
 
 

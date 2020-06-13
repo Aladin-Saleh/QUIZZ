@@ -67,7 +67,7 @@ public function CreateQuizz()
 {
 		$id_int = intval($_GET['id']);
 		
-  		$_SESSION['id'] = $id_int;
+  		$_SESSION['id'] = $id_int; /*J'essaye d'utiliser les sessions, mais c'est pas sur que je l'utilise jusqu'a la fin, phase de test*/
 
 	$this->load->view('Create_Quizz');
 
@@ -83,6 +83,11 @@ public function CreateQuizz()
 		echo "Il faut entrer un nombre de question compris entre 1 et 40 pour crée son quizz !";
 
 	}	
+
+	$annule = $this->input->post('Annule');
+	if (isset($annule)) {
+		header("Location: ../QuizzControl/index?id=".$_SESSION['id']);
+	}
 
 }
 
@@ -133,8 +138,22 @@ public function pageCreation()
 	<input type="submit" name="envoi" value="ENVOYER LES QUESTION !" size="255">
 			</form>
 		</div>
-	<?php
 
+		<div align="center">
+				
+				<form action="" method="post">
+					<input type="submit" name="Annule" value="ANNULER">
+
+				</form>
+
+		</div>
+
+
+	<?php
+	$annule = $this->input->post('Annule');
+	if (isset($annule)) {
+		header("Location: ../QuizzControl/CreateQuizz?id=".$id);
+	}
 
 
 

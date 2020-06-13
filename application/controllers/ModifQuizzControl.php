@@ -62,11 +62,33 @@ public function Modif()
 		//echo "non";
 	}
 	
+	if (isset($_POST['subCleSuppr'])) {
+		$cleS = htmlspecialchars($_POST['cleSupp']);
+		if (!empty($cleS)) {
+			header("Location: Supprimer?id=".$id."&cle=".$cleS);
+		}
+		else
+		{
+
+			//echo "nop";
+		}
+
+		
+	}
+	else
+	{
+		//echo "non";
+	}
 			
 	
 	
 	$this->load->view('ModifQuizz',$data);
 	$this->load->view('Footer.html');
+
+	if (isset($_POST['Retour'])) {
+		header("Location: ../QuizzControl/index?id=".$id);
+
+	}
 
 
 
@@ -250,6 +272,37 @@ public function ExpireB()
 		else
 		{
 			$this->RequeteModif->set_false($id,$NomQuizz,$cle);
+			header("Location: ../QuizzControl/index?id=".$id);
+		}
+	}
+
+
+}
+
+public function Supprimer()
+{
+	$this->load->model('RequeteModif');
+	$this->load->model('RequeteQuizz');
+	$this->load->view('Supprimer.html');
+	$this->load->view('Footer.html');
+
+	$cle = $_GET['cle'];
+	$id = $_GET['id'];
+	$NomQuizz = $this->RequeteModif->get_Name_QuizzCle($id,$cle);
+
+
+	if (isset($_POST['Supprimer'])) {
+		
+		if ($_POST['suppr'] == "oui") {
+			$this->RequeteModif->delete_quizz($cle);
+			$this->RequeteModif->delete_quizz_quest($NomQuizz,$id);
+			$this->RequeteModif->delete_quizz_reponse($NomQuizz,$id);
+			header("Location: ../QuizzControl/index?id=".$id);
+
+		}
+		else
+		{
+			
 			header("Location: ../QuizzControl/index?id=".$id);
 		}
 	}

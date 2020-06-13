@@ -133,6 +133,39 @@ function set_false($ID,$NomQuizz,$Cle)
 	$this->db->update('Quizz');
 }
 
+
+
+
+function delete_quizz($Cle)/*DELETE FROM 'Quizz' WHERE Clé=$Cle;*/
+{
+
+	$this->db->where('Clé', $Cle);
+
+	$this->db->delete('Quizz');
+}
+
+function delete_quizz_quest($Nom,$id)
+{
+	$this->db->where('ID', $id);
+	$this->db->where('NomQuizz', $Nom);
+
+
+	$this->db->delete('Question');
+}
+
+function delete_quizz_reponse($Nom,$id)
+{
+	$this->db->where('ID', $id);
+	$this->db->where('NomQuizz', $Nom);
+
+
+	$this->db->delete('Reponse');
+}
+
+
+
+
+
 }
 
 ?>

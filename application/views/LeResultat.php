@@ -39,7 +39,6 @@
 <?php
 echo br(3);
 ?>
-<a href="../ELeve/result"> Accéder directement à votre résultat</a><br><br>
 <a href="../PageAccueil/">Retour vers le Menu Acceuil</a>
 </div>
 </body>

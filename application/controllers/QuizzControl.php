@@ -369,13 +369,15 @@ public function CreateCle()
     	 for($i=1; $i<=7; $i++){
         $cle .= $conteneur[rand(0, strlen($conteneur)-1)];
 
-
-
     }
-    $duree = $_POST['duree'];
+
+
+    	$duree = $_POST['duree'];
     	$this->RequeteQuizz->set_Quizz($ID,$NombreQuestion,$nomQuizz,$cle,$duree,$Auteur);
     	$this->RequeteQuizz->add_Quizz($ID);
-        echo "<h1 align=center><font color=green>".$cle."</font></h1>";
+        
+        /*echo "<h1 align=center><font color=green>".$cle."</font></h1>";*/
+        header("Location: ../QuizzControl/ExpireB/?id=".$ID."&cle=".$cle);
 
 
     }
@@ -387,6 +389,38 @@ public function CreateCle()
    
     
 	
+
+}
+
+
+public function ExpireB()
+{
+	$this->load->model('RequeteModif');
+	$this->load->model('RequeteQuizz');
+	$this->load->view('EstValide.html');
+	$this->load->view('Footer.html');
+
+	$cle = $_GET['cle'];
+	$id = $_GET['id'];
+	$NomQuizz = $this->RequeteModif->get_Name_QuizzCle($id,$cle);
+
+	echo "<h1 align=center><font color=green>CLE : ".$cle."</font></h1>";
+
+
+	if (isset($_POST['estExpire'])) {
+		
+		if ($_POST['expire'] == "oui") {
+			$this->RequeteModif->set_true($id,$NomQuizz,$cle);
+			header("Location: ../index?id=".$id);
+
+		}
+		else
+		{
+			$this->RequeteModif->set_false($id,$NomQuizz,$cle);
+			header("Location: ../index?id=".$id);
+		}
+	}
+
 
 }
 

@@ -18,10 +18,14 @@
 
 
 </form>
+
+
 <div align="center"> 
 <a href="../QuizzControl/index?id=<?php $id = $_GET['id']; echo $id;?>">Retour au menu du prof !</a>
 
 </div>
+
+
 
 
 	

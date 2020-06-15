@@ -25,11 +25,11 @@ public function Connexion()
 {
 
 
-if (isset($_POST['Retour'])) {
+if (isset($_POST['Retour'])) {/*Pour retourner à la page d'accueil*/
   header("Location: ../PageAccueil/");
 }
 
-	if(isset($_POST['subConn'])) 
+	if(isset($_POST['subConn'])) /*Verifie si on appuie sur le submit de connexion*/
  {
          
          

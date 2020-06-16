@@ -33,7 +33,7 @@ if (isset($_POST['RETOUR'])) {
 	$this->load->view('Footer.html');
 
 
-	if (isset($_POST['subCle'])) {
+	if (isset($_POST['subCle'])) { /*Validation du formulaire */
 		if (!empty($_POST['cle'])) {
 				$cle = htmlspecialchars($_POST['cle']);
 			if ($this->ModelStat->cle_exist($cle) > 0) {
@@ -75,6 +75,8 @@ public function StatCle()
 	
 	$note = $this->ModelStat->get_Note($cle,'Eleve');
 	$data['moyenne'] = $note;
+
+	/*Message en fonction de la moyenne sur un quizz*/
 
 	if ($note > 50 && $note < 70) {
 		$msg = 	"Vos éleves ont tout juste la moyenne ! Ils ne se sont pas foulé !";

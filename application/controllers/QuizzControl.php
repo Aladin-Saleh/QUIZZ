@@ -232,7 +232,7 @@ public function Question()
 
 ?>
 		<form method="post"><?php
-	for ($i=1; $i <=$nmbr_Quest ; $i++) { 
+	for ($i=1; $i <=$nmbr_Quest ; $i++) { /*La boucle vas afficher le nombre d'input nécessaire pour completer le quizz*/
 		echo br(2);
 		$quest = $this->RequeteQuizz->affiche_question($i,$id,$nom_Quizz);
 		echo $quest;
@@ -241,7 +241,7 @@ public function Question()
 
 		$nombre_Rep_Tot += $nombr_Rep;
 		
-				for ($j=1; $j <= $nombr_Rep; $j++) { 
+				for ($j=1; $j <= $nombr_Rep; $j++) { /*Affiche le nombre de rep lié à chaque reponse*/
 					echo br(1);
 					$rep = $this->input->post('reponse'.$i.$j);
 					if (!empty($_POST['reponse'.$i.$j])) {
@@ -346,14 +346,14 @@ public function Reponse()
 
 
 
-public function CreateCle()
+public function CreateCle() /*Création d'une clé aletoire, meme methode qu'en tp, on incrémente et on rajoute*/
 {
 
 	$this->load->model('RequeteQuizz');
 	$this->load->view('Createcle');
 	$this->load->view('Footer.html');
 
-	$conteneur = '0123456789';
+	$conteneur = '0123456789'; /* La clé ne pourra etre composé que de chiffre*/
     $cle = '';
     
     $nomQuizz = $_GET['nomQuizz'];
@@ -366,7 +366,7 @@ public function CreateCle()
   if (isset($_POST['valide'])) {
   	  if (!empty($_POST['duree']) && $_POST['duree'] <= 60) {
     	 
-    	 for($i=1; $i<=7; $i++){
+    	 for($i=1; $i<=7; $i++){ /*J'ai mis 7, mais la valeurs n'a pas vraiment d'importance*/
         $cle .= $conteneur[rand(0, strlen($conteneur)-1)];
 
     }

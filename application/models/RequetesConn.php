@@ -5,8 +5,6 @@ class RequetesConn extends CI_Model{
 
 
 
-
-
 	function get_cle_mdp($mailCon)
 	{
 		$result['MDP']=array();

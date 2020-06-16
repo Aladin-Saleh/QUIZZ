@@ -83,7 +83,7 @@ $result['NombreQuestion']=array();
 }
 
 
-function modif_quest($ID,$NomQuizz,$NumQuest,$newQuest)
+function modif_quest($ID,$NomQuizz,$NumQuest,$newQuest)/*UPDATE DE Question */
 {
 
 	$this->db->set('Questions',$newQuest);
@@ -111,7 +111,7 @@ function modif_rep($ID,$NomQuizz,$NumRep,$NumRepBis,$newRep)
 
 
 
-function set_true($ID,$NomQuizz,$Cle)
+function set_true($ID,$NomQuizz,$Cle)/*UPDATE TRUE de la valeur estExpiré (bool) dans la table Quizz*/
 {
 
 	$this->db->set('estExpiré',TRUE);
@@ -122,7 +122,7 @@ function set_true($ID,$NomQuizz,$Cle)
 	$this->db->update('Quizz');
 }
 
-function set_false($ID,$NomQuizz,$Cle)
+function set_false($ID,$NomQuizz,$Cle)/*UPDATE FALSE de la valeur estExpiré (bool) dans la table Quizz*/
 {
 
 	$this->db->set('estExpiré',FALSE);
@@ -144,7 +144,7 @@ function delete_quizz($Cle)/*DELETE FROM 'Quizz' WHERE Clé=$Cle;*/
 	$this->db->delete('Quizz');
 }
 
-function delete_quizz_quest($Nom,$id)
+function delete_quizz_quest($Nom,$id)/*DELETE FROM 'Question' WHERE ID=$id AND NomQuizz = $Nom;*/
 {
 	$this->db->where('ID', $id);
 	$this->db->where('NomQuizz', $Nom);
@@ -153,7 +153,7 @@ function delete_quizz_quest($Nom,$id)
 	$this->db->delete('Question');
 }
 
-function delete_quizz_reponse($Nom,$id)
+function delete_quizz_reponse($Nom,$id)/*DELETE FROM 'Reponse' WHERE ID=$id AND NomQuizz = $Nom;*/
 {
 	$this->db->where('ID', $id);
 	$this->db->where('NomQuizz', $Nom);

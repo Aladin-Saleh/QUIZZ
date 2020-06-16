@@ -2,8 +2,8 @@
 
 
 
-
-
+//INUTILE
+/*A SUPPRIMER*/
 
 function _getConnection(){
 	static $_conn = NULL;

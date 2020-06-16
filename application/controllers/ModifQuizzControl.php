@@ -97,7 +97,7 @@ public function Modif()
 }
 
 
-public function Change()
+public function Change() /*Dans le cas ou on veut tout changer, on load cette "fonction"*/
 {
 	$this->load->model('RequeteModif');
 	$this->load->model('RequeteQuizz');
@@ -105,7 +105,7 @@ public function Change()
 	$cle = $_GET['cle'];
 	$id = $_GET['id'];
 	$NomQuizz = $this->RequeteModif->get_Name_QuizzCle($id,$cle);
-	$NmbrQuest =  $this->RequeteModif->get_Quest($id,$NomQuizz,$cle);	
+	$NmbrQuest =  $this->RequeteModif->get_Quest($id,$NomQuizz,$cle);	/*On recupere les infos dans la db via les requetes*/
 	$this->load->view('Changement.html');
 	$this->load->view('Footer.html');
 
@@ -250,7 +250,7 @@ public function Expire()
 
 }
 
-public function ExpireB()
+public function ExpireB() /*Si on veut seulement rendre ou non le quizz expiré*/
 {
 	$this->load->model('RequeteModif');
 	$this->load->model('RequeteQuizz');
@@ -279,7 +279,7 @@ public function ExpireB()
 
 }
 
-public function Supprimer()
+public function Supprimer() /*Pour supprimer un quizz*/
 {
 	$this->load->model('RequeteModif');
 	$this->load->model('RequeteQuizz');

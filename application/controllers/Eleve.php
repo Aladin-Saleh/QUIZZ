@@ -20,13 +20,13 @@ class Eleve extends CI_Controller{
 
 /*_______________________________________________________________________________________________________________________________________________________*/
 
-  public function listerunetable(){
+  public function Listerunetable(){
 
 /*Cette fonction permet de lire dans la table "Quizz" et ainsi afficher les données de la db pour informer l'utilisateur des différentes clés existante.
 
 */
     
-    $data['resultat']= $this->EleveMod->readtable('Quizz');
+    $data['resultat']= $this->EleveMod->ReadTable('Quizz');
     $this->load->view('Header.html');
     $this->load->view('LireT',$data);
     $this->load->view('Footer.html');
@@ -35,7 +35,7 @@ class Eleve extends CI_Controller{
 
 
 /*_______________________________________________________________________________________________________________________________________________________*/
-  public function essaie(){
+  public function Essaie(){
 
 /* Ici c'est une focntion qui gère une session, quand l'utilisateur rentre la clef du quizz il est connecté directement au quizz lié.*/
 
@@ -81,28 +81,24 @@ class Eleve extends CI_Controller{
 
 /*_______________________________________________________________________________________________________________________________________________________*/
 
-public function result(){
+public function Result(){
 
 /* Cette fonction affiche la page où l'élève doit rentrer sa clé personnel pour accéder à ses résultats.*/
 
   $this->load->view('Header.html');
   $this->load->view('PageClePerso');
 
-  if (isset($_POST['Retour'])) {
-    header("Location: ../PageAccueil/");
-  }
-
 }
 
 /*_______________________________________________________________________________________________________________________________________________________*/
 
-public function affichageR(){
+public function AffichageR(){
 
   /* Cette fonction sert à prendre en compte la clé personnel de l'élève rentrer dans "PageClePerso.php" pour lui permettre d'accéder à ses résultats*/
 
   
   $cle = $_POST['ClePerso'];
-  $TableEleve = $this->EleveMod->readtable('Eleve');
+  $TableEleve = $this->EleveMod->ReadTable('Eleve');
 
   if(!empty($this->EleveMod->Connexion($cle))){
 
@@ -117,11 +113,12 @@ public function affichageR(){
       $cleQuizz = $TableEleve[$i]['Clé'];
       $mauvaiseRep = $TableEleve[$i]['MauvaiseReponse'];
       $nom = $TableEleve[$i]['Nom'];
+      $nombreBonneRep = $TableEleve[$i]['NombreBonneRep'];
     }
   }
 
  
-  $TableQuizz = $this->EleveMod->readtable('Quizz');
+  $TableQuizz = $this->EleveMod->ReadTable('Quizz');
 
   for($i=0; $i <= count($TableQuizz)-1; $i++){
 
@@ -135,26 +132,34 @@ public function affichageR(){
   }
 
 
-  if($nombreQuestion < 10){
+ /* if($nombreQuestion < 10){
     $noteF = $note - 4*($mauvaiseRep);
   }elseif ($nombreQuestion > 10 && $nombreQuestion < 15) {
     $noteF = $note - 3*($mauvaiseRep);
   }else{
     $noteF = $note - 2*($mauvaiseRep);
-  }
+  }*/
 
 
+$noteEleve = $nombreBonneRep - 0.5*$mauvaiseRep;
 
+$noteF = round( ($noteEleve/$nombreQuestion)* 100 );
 
 /* Si le prof n'a pas fait expirer son Quizz alors il y a une page d'erreur qui s'affiche*/
 
 if($expire == 1){
-$data['NoteF'] = $noteF;
-$data['note'] = $note;
-$data['MauvaiseRep'] = $mauvaiseRep;
-$data['clePerso'] = $cle;
-$data['nom'] = $nom;
-$this->load->view('PageResultat',$data);
+
+  $data['noteE'] = $noteEleve;
+  $data['nombreQuestion'] = $nombreQuestion;
+  $data['NoteF'] = $noteF;
+  $data['note'] = $note;
+  $data['MauvaiseRep'] = $mauvaiseRep;
+  $data['clePerso'] = $cle;
+  $data['nom'] = $nom;
+  $data['BonneRep'] = $nombreBonneRep;
+  $this->load->view('Header.html');
+  $this->load->view('PageResultat',$data);
+  $this->load->view('Footer.html');
 }else{
   $this->load->view('Erreur');
 }
@@ -163,6 +168,7 @@ $this->load->view('PageResultat',$data);
   echo "<h2>"."Ce compte n'existe pas"."</h2>";
    $this->load->view('Header.html');
   $this->load->view('PageClePerso');
+  $this->load->view('Footer.html');
 }
 
 

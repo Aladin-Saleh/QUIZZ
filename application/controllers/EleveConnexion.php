@@ -92,10 +92,7 @@ public function index(){
 
 public function resultat(){
 
-	
-
-
-  	$donne['cle'] =$_SESSION['cle'];
+	$donne['cle'] =$_SESSION['cle'];
     $donne['eleve'] = $_SESSION['test'];
     $donne['id'] = $_SESSION['id'];
     $donne['nomQuizz'] = $_SESSION['nom'];
@@ -109,9 +106,7 @@ public function resultat(){
 		}
 	}
 
-	$donne['nombreQuestion'] = $nombreQuestion;
-
-    $TableEleve = $this->EleveMod->readtable('Eleve');
+	$TableEleve = $this->EleveMod->readtable('Eleve');
 
 
     
@@ -142,8 +137,7 @@ public function resultat(){
 	
 
 	$nombreBonneRéponsesTotal = count($Vraireponse);
-	$donne['oui'] = $nombreBonneRéponsesTotal;
-	$donne['RealAns'] = $Vraireponse;
+	
 
 	$mauvaiseRep = 0;
 	$k=0;
@@ -173,42 +167,15 @@ public function resultat(){
 		}
 	}
 	
-	/*for($i=0;$i<= count($TableReponse)-1;$i++){
-
-		if($TableReponse[$i]['NomQuizz'] == $_SESSION['nom']){
-			
-			
-
-				if($choix[$k] == $TableReponse[$i]['Réponses']){
-					if($TableReponse[$i]['BonneReponse'] == 1){
-						$fa[] = $TableReponse[$i]['Réponses'] ;
-					}
-				$k=$k+1;
-				}
-			
-		}
-	}*/
-	$donne['mauvaiseRep'] = $mauvaiseRep;
-
 	$note = $nombreQuestion - ($mauvaiseRep/2);
-	$donne['note'] = $note;
 	
 	$nombreBonneReponseEleve = count($fa);
 
-	$donne['essaie'] = $fa;
-
-	$donne['Remi'] = $nombreBonneReponseEleve;
-
 	$Resultado = ($nombreBonneReponseEleve/$nombreBonneRéponsesTotal)*100;
 
-	$donne['res'] = $Resultado;
+	$this->EleveMod->set_Resultat($Resultado,$r,$_SESSION['test'], $mauvaiseRep,$nombreBonneReponseEleve);
 
-
-	$this->EleveMod->set_Resultat($Resultado,$r,$_SESSION['test'], $mauvaiseRep);
-
-
-
-    $this->load->view('Header.html');
+	$this->load->view('Header.html');
     $this->load->view('LeResultat',$donne);
     $this->load->view('Footer.html');
   }

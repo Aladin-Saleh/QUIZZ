@@ -17,9 +17,12 @@
 <h1 align="center"><?php echo 'Bienvenue ' .$Eleve.' sur le Quizz '.'"'.$NomQuizz.'"';?></h1>
 
 </div><br><br>
-<p align="center" style="border: 1px solid #C82C3E; font-weight:bold;"> Validé vos réponses avant la fin du timing sinon vous perdez toutes vos données !!!!</p>
+<div align="center" style="border: 1px solid #C82C3E; font-weight:bold;"><br>
+<p> Validé vos réponses avant la fin du timing sinon vous perdez toutes vos données !!!!</p>
+<p> Attention une mauvaise réponse vous fait perdre des points !</p>
+</div>
 <div style="position: fixed;" align="center" id="Temps"></div><br>
-<hr style= "width: 60%">
+<hr style="height: 6px; color: #839D2D; background-color: #839D2D; width: 60%; border: none;">
 
 <!--___________________________________________________________________________________________________________________________________________-->
 

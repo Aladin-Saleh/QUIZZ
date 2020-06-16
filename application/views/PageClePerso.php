@@ -15,7 +15,7 @@
 
 	<div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6;">
 <div align="center"><br><br>
-	<form method="post" action="../Eleve/affichageR">
+	<form method="post" action="../Eleve/AffichageR">
 
 	
 		
@@ -30,7 +30,7 @@
 
 <div align="center"><br>
 	<form action="" method="post">
-		<input type="submit" name="Retour" value="RETOUR">
+		<a href="../PageAccueil/"> Retour </a>
 	</form>
 </div>
 

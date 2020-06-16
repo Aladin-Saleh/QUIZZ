@@ -3,7 +3,7 @@
 class EleveMod extends CI_Model{
 
 
-    public function readtable($table){
+    public function Readtable($table){
 
     /*Cette fonction permet de lire la db et de la retourner*/
 
@@ -98,10 +98,11 @@ class EleveMod extends CI_Model{
 
     /*Cette fonction permet d'ajouter la note à la table Eleve*/
 
-    public function set_Resultat($res,$clePerso,$nom,$mauvaiseRep){
+    public function set_Resultat($res,$clePerso,$nom,$mauvaiseRep,$bonne){
 
         $this->db->set('Note', $res);
         $this->db->set('MauvaiseReponse', $mauvaiseRep);
+        $this->db->set('NombreBonneRep', $bonne);
         $this->db->where('Nom',$nom);
         $this->db->where('CléPerso', $clePerso);
 

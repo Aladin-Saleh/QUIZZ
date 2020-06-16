@@ -15,19 +15,33 @@
 	<?php
 
 	echo 'Bienvenue '.$nom.' !';
+	echo br(3);
+	echo "<hr>";
+	
 
-	echo br(2);
-
+	echo "<h2>".'Resultat sans prise en compte des fautes : '."</h2>";
+	echo br();
 	echo 'Voici votre pourcentage de bonnes réponses : '. $note.'%';
 	echo br();
+	echo 'La note est : '. $BonneRep.'/'.$nombreQuestion;
+	echo br(3);
 
+	echo "<hr>";
+	echo "<h2>".'Resultat avec prise en compte des fautes : '."</h2>";
+	echo br();
 	echo 'Votre nombre de fautes : '.$MauvaiseRep;
 
 	echo br(2);
-	echo 'Voici votre note final sur ce Quizz : '. $NoteF.'%';
-
 
 	?>
+	<div align="center" style="border: 1px solid #C82C3E; font-weight:bold;"><?php
+	echo 'Voici votre pourcentage final sur ce Quizz : '. $NoteF.'%';
+	echo br();
+
+	echo 'et votre note final : '.$noteE.'/'.$nombreQuestion;
+
+	?>
+	</div>
 	<br>
 	<br>
 

@@ -16,6 +16,8 @@ public function Modif()
 {
 
 	$this->load->model('RequeteModif');
+	$this->load->model('ModelStat');
+
 	$id = $_GET['id'];
 
 	
@@ -28,13 +30,15 @@ public function Modif()
 
 	if (isset($_POST['subCle'])) {
 		$cle = htmlspecialchars($_POST['cle']);
-		if (!empty($cle)) {
+		if (!empty($cle) && $this->ModelStat->cle_existQ($cle)) { /*On verifie que le champs est remplie et que la clé exist*/
+
 			header("Location: Change?id=".$id."&cle=".$cle);
 		}
 		else
 		{
 
 			//echo "nop";
+			echo "<font color=red>Cle inconnue</font>";
 		}
 
 		
@@ -46,13 +50,15 @@ public function Modif()
 
 	if (isset($_POST['subCleExpire'])) {
 		$cleB = htmlspecialchars($_POST['cleEx']);
-		if (!empty($cleB)) {
+		if (!empty($cleB) && $this->ModelStat->cle_existQ($cleB)) {
 			header("Location: ExpireB?id=".$id."&cle=".$cleB);
 		}
 		else
 		{
 
 			//echo "nop";
+			echo "<font color=red>Cle inconnue</font>";
+
 		}
 
 		
@@ -64,13 +70,15 @@ public function Modif()
 	
 	if (isset($_POST['subCleSuppr'])) {
 		$cleS = htmlspecialchars($_POST['cleSupp']);
-		if (!empty($cleS)) {
+		if (!empty($cleS) && $this->ModelStat->cle_existQ($cleS) ) {
 			header("Location: Supprimer?id=".$id."&cle=".$cleS);
 		}
 		else
 		{
 
 			//echo "nop";
+			echo "<font color=red>Cle inconnue</font>";
+
 		}
 
 		

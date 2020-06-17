@@ -33,6 +33,17 @@ function cle_exist($cle)/*Verifie si la clé existe, si oui $query > 0*/
 }
 
 
+function cle_existQ($cle)/*Verifie si la clé existe, si oui $query > 0*/
+{
+
+	$this->db->where('Clé',$cle);
+
+		$query = $this->db->get('Quizz');
+		
+			return $query->num_rows();
+}
+
+
 
 
 
